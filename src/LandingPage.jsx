@@ -668,7 +668,7 @@ export default function LandingPage() {
 
           <FadeIn delay={0.15}>
             <p style={{ fontSize: "16px", color: COLORS.gray, lineHeight: 1.7, marginTop: "20px" }}>
-              Escribime. Agendamos una llamada de 20 minutos, te hago un diagnóstico rápido de tu negocio, y vemos si tiene sentido trabajar juntos.
+              Escribime. Agendamos una Sesión de Diagnóstico Estratégico de 30 minutos, analizamos tu negocio, y vemos si tiene sentido trabajar juntos.
             </p>
           </FadeIn>
 
