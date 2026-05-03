@@ -321,6 +321,8 @@ export default function LandingPage() {
         @media (min-width: 720px) { .at-objectives-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
         .at-empresas-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
         @media (min-width: 900px) { .at-empresas-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+        details summary::-webkit-details-marker { display: none; }
+        details[open] .at-faq-chevron { transform: rotate(45deg); background: ${COLORS.purple}30 !important; }
         .at-sticky-cta {
           position: fixed; left: 0; right: 0; bottom: 0;
           padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -695,25 +697,30 @@ export default function LandingPage() {
               </FadeIn>
               <FadeIn delay={0.3}>
                 <p style={{ fontSize: "17px", color: COLORS.grayLight, lineHeight: 1.8, marginTop: "20px" }}>
-                  A los <strong style={{ color: COLORS.gold }}>13 años</strong> ahorré lo que pude, compré una bolsa de 100 paños multiusos y salí a la calle a venderlos. Reinvertí todo y fundé mi primera empresa: <em style={{ color: COLORS.white }}>Distribuidora Innamorati</em>. Mi primera socia fue mi hermana de 11. Llegamos a tener <strong style={{ color: COLORS.white }}>27 vendedores</strong> a comisión vendiendo artículos de limpieza puerta a puerta.
+                  A los <strong style={{ color: COLORS.gold }}>13 años</strong> junté lo que pude, compré una bolsa de 100 paños multiusos y salí a venderlos puerta a puerta. Reinvertí cada peso y fundé mi primera empresa: <em style={{ color: COLORS.white }}>Distribuidora Innamorati</em>. En poco tiempo pasé de los 100 paños a un catálogo entero de artículos de limpieza, y armé un equipo de <strong style={{ color: COLORS.white }}>27 vendedores a comisión</strong> trabajando para mí.
                 </p>
               </FadeIn>
               <FadeIn delay={0.4}>
                 <p style={{ fontSize: "17px", color: COLORS.grayLight, lineHeight: 1.8, marginTop: "20px" }}>
-                  Desde ese día <strong style={{ color: COLORS.white }}>nunca paré</strong>. Fundé proyectos, fracasé en algunos, aprendí, volví a empezar, y nunca dejé de capacitarme para convertirme en el empresario que de chico no me animaba a imaginar.
+                  A los 16 ya facturaba más que muchos adultos que conocía. Aprendí en la calle lo que no se enseña en ningún libro: cómo cobrar, cómo contratar, cómo despedir, cómo negociar con proveedores que te quieren ver fracasar.
+                </p>
+              </FadeIn>
+              <FadeIn delay={0.5}>
+                <p style={{ fontSize: "17px", color: COLORS.grayLight, lineHeight: 1.8, marginTop: "20px" }}>
+                  Desde ese día <strong style={{ color: COLORS.white }}>nunca paré</strong>. Probé proyectos en sectores muy distintos. Algunos funcionaron. Otros me quemaron plata y aprendí caro. Cada error me dejó un manual interno de qué no volver a hacer. Estudié sin parar, me capacité en todo lo que necesitaba, y hoy a los 24 lidero <strong style={{ color: COLORS.white }}>3 empresas con clientes en LATAM, USA y Europa</strong>.
                 </p>
               </FadeIn>
 
               {/* Stat highlight tipo pull-quote */}
-              <FadeIn delay={0.5}>
+              <FadeIn delay={0.6}>
                 <div style={{ marginTop: "32px", display: "flex", alignItems: "center", gap: "20px", padding: "20px 24px", borderRadius: "14px", background: `linear-gradient(135deg, ${COLORS.gold}10, ${COLORS.purple}08)`, border: `1px solid ${COLORS.gold}25` }}>
                   <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "clamp(48px, 6vw, 64px)", lineHeight: 1, fontWeight: 700, background: `linear-gradient(135deg, ${COLORS.gold}, ${COLORS.goldLight})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                    13
+                    27
                   </span>
                   <p style={{ fontSize: "14px", color: COLORS.grayLight, lineHeight: 1.5, fontWeight: 450 }}>
-                    Los años que tenía cuando fundé mi primera empresa con mi hermana de 11.{" "}
-                    <strong style={{ color: COLORS.white }}>27 vendedores a comisión</strong>{" "}
-                    vendiendo artículos de limpieza puerta a puerta.
+                    Vendedores a comisión que tenía a los 13 años trabajando para mí.{" "}
+                    <strong style={{ color: COLORS.white }}>Aprendí a liderar antes que a manejar</strong>,{" "}
+                    y nunca dejé de hacerlo.
                   </p>
                 </div>
               </FadeIn>
@@ -1362,6 +1369,118 @@ export default function LandingPage() {
               </div>
             </FadeIn>
           </div>
+        </div>
+      </section>
+
+      {/* FAQ — resolución de dudas antes del CTA Final */}
+      <section className="at-section-pad" style={{ paddingBottom: "0" }}>
+        <div className="at-fit" style={{ maxWidth: "820px", margin: "0 auto" }}>
+          <FadeIn>
+            <div style={{ textAlign: "center", marginBottom: "12px" }}>
+              <Badge>Preguntas frecuentes</Badge>
+            </div>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px", textAlign: "center" }}>
+              Lo que probablemente te estás{" "}
+              <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold }}>preguntando</span>.
+            </h2>
+          </FadeIn>
+
+          <div style={{ marginTop: "44px", display: "flex", flexDirection: "column", gap: "12px" }}>
+            {[
+              {
+                q: "¿Cuánto duran las sesiones y dónde se hacen?",
+                a: "90 minutos cada una, una vez por semana. La mayoría las hago por Google Meet. Si estás en Buenos Aires, podemos hacer algunas presenciales.",
+              },
+              {
+                q: "¿Cuándo arrancamos?",
+                a: "Arrancamos automáticamente con tu primer pago. La fecha y horario se confirman al instante. No tenés que esperar listas ni cohortes.",
+              },
+              {
+                q: "¿Qué resultados puedo esperar?",
+                a: "Lo que veo en los founders con los que trabajé es más visión sobre dónde están parados, más clientes, más facturación, y entender exactamente cómo crecer dentro de su sector. No prometo magia. Trabajo intensivo y resultados concretos.",
+              },
+              {
+                q: "¿Pago todo de una o mes a mes?",
+                a: "Mes a mes. Sin compromiso anticipado. Si después del primer mes no encajamos, no seguimos.",
+              },
+              {
+                q: "¿Trabajaste con mi industria?",
+                a: "Software factory con IA, agencias digitales, ecommerce, gastronomía, retail, servicios profesionales B2B y B2C. Si tu industria no aparece acá, escribime y te digo si hay match real.",
+              },
+              {
+                q: "¿Puedo hablar con un cliente actual antes de pagar?",
+                a: "Sí. En la sesión de diagnóstico te paso el WhatsApp de uno o dos clientes activos para que les escribas directo y les preguntes lo que quieras.",
+              },
+            ].map((item, i) => (
+              <FadeIn key={i} delay={i * 0.06}>
+                <details
+                  style={{
+                    background: COLORS.bgCard,
+                    border: `1px solid ${COLORS.border}`,
+                    borderRadius: "12px",
+                    padding: "18px 22px",
+                    cursor: "pointer",
+                    transition: "border-color 0.3s",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = COLORS.purple + "40"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; }}
+                >
+                  <summary
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      gap: "16px",
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      color: COLORS.white,
+                      listStyle: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <span>{item.q}</span>
+                    <span
+                      style={{
+                        flexShrink: 0,
+                        width: "28px",
+                        height: "28px",
+                        borderRadius: "50%",
+                        background: COLORS.purple + "15",
+                        border: `1px solid ${COLORS.purple}30`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: COLORS.purpleLight,
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        transition: "transform 0.3s",
+                      }}
+                      className="at-faq-chevron"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p
+                    style={{
+                      marginTop: "14px",
+                      fontSize: "15px",
+                      color: COLORS.grayLight,
+                      lineHeight: 1.7,
+                      fontWeight: 450,
+                    }}
+                  >
+                    {item.a}
+                  </p>
+                </details>
+              </FadeIn>
+            ))}
+          </div>
+
+          <FadeIn delay={0.5}>
+            <p style={{ fontSize: "14px", color: COLORS.gray, lineHeight: 1.7, marginTop: "32px", textAlign: "center" }}>
+              ¿Tenés otra pregunta? Escribime por WhatsApp. Respondo personal.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
