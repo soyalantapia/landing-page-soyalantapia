@@ -7,3 +7,6 @@ dist-ssr
 !.env.example
 *.log
 .vite
+
+# vite sandbox cache (auto-generated)
+vite.config.js.timestamp-*.mjs
