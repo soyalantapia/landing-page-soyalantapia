@@ -323,6 +323,7 @@ export default function LandingPage() {
         @media (min-width: 900px) { .at-empresas-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
         details summary::-webkit-details-marker { display: none; }
         details[open] .at-faq-chevron { transform: rotate(45deg); background: ${COLORS.purple}30 !important; }
+        @media (min-width: 720px) { .at-speaker-card { grid-template-columns: 360px 1fr !important; gap: 40px !important; } }
         .at-sticky-cta {
           position: fixed; left: 0; right: 0; bottom: 0;
           padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -367,9 +368,45 @@ export default function LandingPage() {
         <a
           href="#top"
           onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-          style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "0.5px", color: COLORS.white, textDecoration: "none", whiteSpace: "nowrap", cursor: "pointer" }}
+          style={{ display: "inline-flex", alignItems: "center", gap: "8px", textDecoration: "none", whiteSpace: "nowrap", cursor: "pointer" }}
         >
-          ALAN TAPIA
+          <span
+            style={{
+              width: "26px",
+              height: "26px",
+              borderRadius: "50%",
+              background: `linear-gradient(135deg, ${COLORS.gold}, ${COLORS.goldDark})`,
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontFamily: "'Playfair Display', serif",
+              fontStyle: "italic",
+              fontSize: "13px",
+              fontWeight: 700,
+              color: COLORS.bg,
+              letterSpacing: "-1px",
+              boxShadow: `0 2px 12px ${COLORS.gold}40`,
+            }}
+          >
+            AT
+          </span>
+          <span style={{ display: "inline-flex", alignItems: "baseline", gap: "4px" }}>
+            <span
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontStyle: "italic",
+                fontSize: "16px",
+                fontWeight: 600,
+                color: COLORS.gold,
+                letterSpacing: "-0.3px",
+              }}
+            >
+              Alan
+            </span>
+            <span style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "1.2px", color: COLORS.white, textTransform: "uppercase" }}>
+              Tapia
+            </span>
+          </span>
         </a>
 
         <div className="at-nav-links" style={{ display: "flex", alignItems: "center", gap: "22px" }}>
@@ -684,7 +721,7 @@ export default function LandingPage() {
                 aspectRatio="3/4"
                 fallbackInitials="AT"
                 fallbackLabel="Alan Tapia"
-                fallbackSubLabel="Founder & CEO · 24 años"
+                fallbackSubLabel="Founder & CEO · 25 años"
                 accentColor="gold"
               />
             </FadeIn>
@@ -707,7 +744,7 @@ export default function LandingPage() {
               </FadeIn>
               <FadeIn delay={0.5}>
                 <p style={{ fontSize: "17px", color: COLORS.grayLight, lineHeight: 1.8, marginTop: "20px" }}>
-                  Desde ese día <strong style={{ color: COLORS.white }}>nunca paré</strong>. Probé proyectos en sectores muy distintos. Algunos funcionaron. Otros me quemaron plata y aprendí caro. Cada error me dejó un manual interno de qué no volver a hacer. Estudié sin parar, me capacité en todo lo que necesitaba, y hoy a los 24 lidero <strong style={{ color: COLORS.white }}>3 empresas con clientes en LATAM, USA y Europa</strong>.
+                  Desde ese día <strong style={{ color: COLORS.white }}>nunca paré</strong>. Probé proyectos en sectores muy distintos. Algunos funcionaron. Otros me quemaron plata y aprendí caro. Cada error me dejó un manual interno de qué no volver a hacer. Estudié sin parar, me capacité en todo lo que necesitaba, y hoy a los 25 lidero <strong style={{ color: COLORS.white }}>3 empresas con clientes en LATAM, USA y Europa</strong>.
                 </p>
               </FadeIn>
 
@@ -743,14 +780,14 @@ export default function LandingPage() {
                 {
                   year: "2016",
                   name: "Xnod",
-                  tagline: "Software factory enfocada en soluciones de inteligencia artificial para grandes empresas.",
+                  tagline: "La empresa de IA de los bancos, mineras y fintech de LATAM. Software factory que construye soluciones de inteligencia artificial para operaciones críticas.",
                   clients: ["Mercedes-Benz", "Banco de Panamá", "Isuzu", "EPEC", "YPF"],
                 },
                 {
                   year: "2020",
                   name: "Deenex",
-                  tagline: "Tecnología para el sector gastronómico. Empezamos con 6 socios en un nicho hipercompetitivo. Hoy somos 2, con +250 locales activos.",
-                  clients: ["+250 locales gastronómicos", "Foco LATAM"],
+                  tagline: "Convertimos clientes anónimos en recurrentes para marcas multisucursal. App + fidelidad + IA. +250 locales gastronómicos activos en LATAM.",
+                  clients: ["+250 locales activos", "App + Fidelidad + IA", "deenex.tech"],
                 },
               ].map((biz, i) => (
                 <FadeIn key={biz.name} delay={i * 0.1}>
@@ -769,6 +806,70 @@ export default function LandingPage() {
                 </FadeIn>
               ))}
             </div>
+          </div>
+
+          {/* SPEAKER / CONFERENCIAS */}
+          <div style={{ marginTop: "72px" }}>
+            <FadeIn>
+              <p style={{ fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase", color: COLORS.purpleLight, fontWeight: 600, marginBottom: "24px" }}>Speaker activo</p>
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <div
+                style={{
+                  display: "grid",
+                  gap: "32px",
+                  gridTemplateColumns: "1fr",
+                  alignItems: "center",
+                  padding: "clamp(24px, 4vw, 36px)",
+                  borderRadius: "20px",
+                  background: `linear-gradient(135deg, ${COLORS.purple}10, ${COLORS.gold}06)`,
+                  border: `1px solid ${COLORS.purple}25`,
+                }}
+                className="at-speaker-card"
+              >
+                <div style={{ borderRadius: "14px", overflow: "hidden", border: `1px solid ${COLORS.gold}30`, aspectRatio: "4/3" }}>
+                  <Photo
+                    src="fotos/alan-portrait.jpg"
+                    alt="Alan Tapia dando una conferencia"
+                    aspectRatio="4/3"
+                    fallbackInitials="🎤"
+                    fallbackLabel="Conferencias"
+                    accentColor="purple"
+                  />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: "clamp(22px, 2.8vw, 30px)", fontWeight: 700, color: COLORS.white, lineHeight: 1.25, letterSpacing: "-0.3px", marginBottom: "16px" }}>
+                    Doy conferencias, charlas y capacitaciones.
+                  </h3>
+                  <p style={{ fontSize: "16px", color: COLORS.grayLight, lineHeight: 1.7, fontWeight: 450, marginBottom: "20px" }}>
+                    Subo a escenarios y cámaras a hablar de lo que vivo todos los días. Si tu organización busca un speaker que no venda humo, hablemos.
+                  </p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+                    {[
+                      "IA aplicada a negocios",
+                      "Operación y escala",
+                      "Liderazgo de equipos",
+                      "Founder argentino",
+                    ].map((t) => (
+                      <span
+                        key={t}
+                        style={{
+                          padding: "6px 14px",
+                          borderRadius: "8px",
+                          fontSize: "13px",
+                          fontWeight: 500,
+                          color: COLORS.grayLight,
+                          background: `${COLORS.bg}80`,
+                          border: `1px solid ${COLORS.border}`,
+                        }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
           </div>
 
           {/* OBJETIVO ACTUAL — 3 pilares + statement final */}
