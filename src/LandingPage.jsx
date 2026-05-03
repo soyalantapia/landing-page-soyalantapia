@@ -360,14 +360,15 @@ export default function LandingPage() {
       >
         <a
           href="#top"
-          style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "0.5px", color: COLORS.white, textDecoration: "none", whiteSpace: "nowrap" }}
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "0.5px", color: COLORS.white, textDecoration: "none", whiteSpace: "nowrap", cursor: "pointer" }}
         >
           ALAN TAPIA
         </a>
 
         <div className="at-nav-links" style={{ display: "flex", alignItems: "center", gap: "22px" }}>
           {[
-            ["Programa", "#programa"],
+            ["El programa", "#el-programa"],
             ["Fases", "#fases"],
             ["Inversión", "#inversion"],
           ].map(([label, href]) => (
@@ -481,27 +482,55 @@ export default function LandingPage() {
           </FadeIn>
 
           <FadeIn instant delay={0.6}>
-            <a
-              href="#cta"
-              style={{
-                display: "inline-block", marginTop: "36px", padding: "16px 40px",
-                borderRadius: "100px", fontSize: "15px", fontWeight: 600,
-                background: `linear-gradient(135deg, ${COLORS.purple}, ${COLORS.purpleDark})`,
-                color: "#fff", textDecoration: "none", letterSpacing: "0.3px",
-                boxShadow: `0 4px 30px ${COLORS.purple}30`,
-                transition: "transform 0.2s, box-shadow 0.2s",
-              }}
-              onMouseEnter={(e) => { e.target.style.transform = "scale(1.04)"; e.target.style.boxShadow = `0 4px 40px ${COLORS.purple}50`; }}
-              onMouseLeave={(e) => { e.target.style.transform = "scale(1)"; e.target.style.boxShadow = `0 4px 30px ${COLORS.purple}30`; }}
-            >
-              Ver cómo funciona ↓
-            </a>
+            <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", marginTop: "44px" }}>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="at-btn-tap"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "10px",
+                  padding: "16px 32px",
+                  borderRadius: "100px", fontSize: "15px", fontWeight: 700,
+                  background: `linear-gradient(135deg, ${COLORS.whatsapp}, ${COLORS.whatsappDark})`,
+                  color: "#fff", textDecoration: "none", letterSpacing: "0.3px",
+                  border: `1px solid ${COLORS.gold}40`,
+                  boxShadow: `0 4px 30px ${COLORS.whatsapp}30`,
+                  transition: "transform 0.2s, box-shadow 0.2s",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.04)"; e.currentTarget.style.boxShadow = `0 8px 40px ${COLORS.whatsapp}50`; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = `0 4px 30px ${COLORS.whatsapp}30`; }}
+              >
+                <WhatsAppIcon size={18} />
+                Quiero hablar con Alan
+              </a>
+              <a
+                href="#el-programa"
+                className="at-btn-tap"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "8px",
+                  padding: "16px 28px",
+                  borderRadius: "100px", fontSize: "15px", fontWeight: 600,
+                  background: "transparent",
+                  color: COLORS.grayLight, textDecoration: "none", letterSpacing: "0.3px",
+                  border: `1px solid ${COLORS.border}`,
+                  transition: "border-color 0.2s, color 0.2s, background 0.2s",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = COLORS.white; e.currentTarget.style.borderColor = COLORS.purple + "60"; e.currentTarget.style.background = COLORS.purple + "08"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = COLORS.grayLight; e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.background = "transparent"; }}
+              >
+                Cómo funciona
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </a>
+            </div>
           </FadeIn>
         </div>
       </section>
 
       {/* PROBLEMA */}
-      <section id="programa" className="at-section-pad at-section-light">
+      <section className="at-section-pad at-section-light">
         <div className="at-fit-wide">
           <FadeIn>
             <Badge theme="light">El problema</Badge>
@@ -532,20 +561,38 @@ export default function LandingPage() {
           <FadeIn delay={0.4}>
             <div
               style={{
-                marginTop: "56px",
-                padding: "32px 36px",
-                borderLeft: `4px solid ${COLORS.goldDark}`,
-                background: `linear-gradient(90deg, ${COLORS.goldDark}10 0%, transparent 70%)`,
-                borderRadius: "0 14px 14px 0",
-                maxWidth: "880px",
+                marginTop: "72px",
+                textAlign: "center",
+                maxWidth: "780px",
+                marginLeft: "auto",
+                marginRight: "auto",
+                position: "relative",
               }}
             >
-              <p style={{ fontSize: "clamp(20px, 2.4vw, 26px)", color: COLORS.textOnLight, lineHeight: 1.45, fontWeight: 600, letterSpacing: "-0.3px" }}>
-                No te falta talento.{" "}
-                <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.goldDark, fontWeight: 700 }}>
-                  Te falta alguien con experiencia
-                </span>{" "}
-                que se siente al lado tuyo, mire tu negocio con ojos frescos, y te diga exactamente qué mover para crecer.
+              <div
+                style={{
+                  width: "60px",
+                  height: "3px",
+                  background: `linear-gradient(90deg, ${COLORS.goldDark}, ${COLORS.purple})`,
+                  borderRadius: "2px",
+                  margin: "0 auto 28px",
+                }}
+              />
+              <p
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: "clamp(24px, 3.2vw, 36px)",
+                  color: COLORS.textOnLight,
+                  lineHeight: 1.35,
+                  fontWeight: 500,
+                  letterSpacing: "-0.5px",
+                }}
+              >
+                No te falta talento. Te falta alguien con{" "}
+                <em style={{ color: COLORS.goldDark, fontWeight: 600 }}>experiencia</em>{" "}
+                que se siente al lado tuyo y te diga{" "}
+                <em style={{ color: COLORS.purple, fontWeight: 600 }}>qué mover</em>{" "}
+                para crecer.
               </p>
             </div>
           </FadeIn>
@@ -553,7 +600,7 @@ export default function LandingPage() {
       </section>
 
       {/* PROPUESTA */}
-      <section className="at-section-pad at-section-light" style={{ paddingTop: "0", borderTop: `1px solid ${COLORS.borderOnLight}` }}>
+      <section id="el-programa" className="at-section-pad at-section-light" style={{ paddingTop: "0", borderTop: `1px solid ${COLORS.borderOnLight}` }}>
         <div className="at-fit-wide" style={{ paddingTop: "clamp(60px, 8vw, 100px)" }}>
           <div className="at-prop-grid">
             <div>
