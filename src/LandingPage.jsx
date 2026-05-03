@@ -319,6 +319,8 @@ export default function LandingPage() {
         @media (min-width: 1100px) { .at-quote-grid { grid-template-columns: repeat(3, 1fr) !important; } }
         .at-objectives-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
         @media (min-width: 720px) { .at-objectives-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
+        .at-empresas-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+        @media (min-width: 900px) { .at-empresas-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
         .at-sticky-cta {
           position: fixed; left: 0; right: 0; bottom: 0;
           padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -474,7 +476,7 @@ export default function LandingPage() {
 
           <FadeIn instant delay={0.45}>
             <div style={{ display: "flex", gap: "clamp(24px, 5vw, 56px)", justifyContent: "center", marginTop: "32px", flexWrap: "wrap" }}>
-              {[["3", "empresas"], ["+70", "personas"], ["11", "años emprendiendo"]].map(([n, l]) => (
+              {[["3", "empresas"], ["+70", "personas"], ["11", "años"]].map(([n, l]) => (
                 <div key={l} style={{ textAlign: "center" }}>
                   <div style={{ fontSize: "clamp(28px, 4vw, 38px)", fontWeight: 700, lineHeight: 1, background: `linear-gradient(135deg, ${COLORS.purpleLight}, ${COLORS.purple})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{n}</div>
                   <div style={{ fontSize: "12px", color: COLORS.gray, marginTop: "8px", letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 500 }}>{l}</div>
@@ -701,15 +703,29 @@ export default function LandingPage() {
                   Desde ese día <strong style={{ color: COLORS.white }}>nunca paré</strong>. Fundé proyectos, fracasé en algunos, aprendí, volví a empezar, y nunca dejé de capacitarme para convertirme en el empresario que de chico no me animaba a imaginar.
                 </p>
               </FadeIn>
+
+              {/* Stat highlight tipo pull-quote */}
+              <FadeIn delay={0.5}>
+                <div style={{ marginTop: "32px", display: "flex", alignItems: "center", gap: "20px", padding: "20px 24px", borderRadius: "14px", background: `linear-gradient(135deg, ${COLORS.gold}10, ${COLORS.purple}08)`, border: `1px solid ${COLORS.gold}25` }}>
+                  <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "clamp(48px, 6vw, 64px)", lineHeight: 1, fontWeight: 700, background: `linear-gradient(135deg, ${COLORS.gold}, ${COLORS.goldLight})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                    13
+                  </span>
+                  <p style={{ fontSize: "14px", color: COLORS.grayLight, lineHeight: 1.5, fontWeight: 450 }}>
+                    Los años que tenía cuando fundé mi primera empresa con mi hermana de 11.{" "}
+                    <strong style={{ color: COLORS.white }}>27 vendedores a comisión</strong>{" "}
+                    vendiendo artículos de limpieza puerta a puerta.
+                  </p>
+                </div>
+              </FadeIn>
             </div>
           </div>
 
           {/* TIMELINE EMPRESAS */}
-          <div style={{ marginTop: "64px" }}>
+          <div style={{ marginTop: "72px" }}>
             <FadeIn>
-              <p style={{ fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase", color: COLORS.purpleLight, fontWeight: 600, marginBottom: "20px" }}>Las 3 empresas que opero hoy</p>
+              <p style={{ fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase", color: COLORS.purpleLight, fontWeight: 600, marginBottom: "24px" }}>Las 3 empresas que opero hoy</p>
             </FadeIn>
-            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <div className="at-empresas-grid">
               {[
                 {
                   year: "2014",
@@ -731,15 +747,15 @@ export default function LandingPage() {
                 },
               ].map((biz, i) => (
                 <FadeIn key={biz.name} delay={i * 0.1}>
-                  <div className="at-biz-card">
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "16px", flexWrap: "wrap", marginBottom: "10px" }}>
-                      <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "22px", color: COLORS.gold, fontWeight: 700 }}>{biz.year}</span>
+                  <div className="at-biz-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginBottom: "12px" }}>
+                      <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "20px", color: COLORS.gold, fontWeight: 700 }}>{biz.year}</span>
                       <span style={{ fontSize: "22px", fontWeight: 700, color: COLORS.white, letterSpacing: "-0.3px" }}>{biz.name}</span>
                     </div>
-                    <p style={{ fontSize: "15px", color: COLORS.grayLight, lineHeight: 1.7 }}>{biz.tagline}</p>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "14px" }}>
+                    <p style={{ fontSize: "14px", color: COLORS.grayLight, lineHeight: 1.6, flex: 1 }}>{biz.tagline}</p>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "16px" }}>
                       {biz.clients.map((c) => (
-                        <span key={c} style={{ padding: "5px 12px", borderRadius: "6px", fontSize: "12px", fontWeight: 500, color: COLORS.gray, background: `${COLORS.bg}`, border: `1px solid ${COLORS.border}` }}>{c}</span>
+                        <span key={c} style={{ padding: "4px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: 500, color: COLORS.gray, background: `${COLORS.bg}`, border: `1px solid ${COLORS.border}` }}>{c}</span>
                       ))}
                     </div>
                   </div>
@@ -896,11 +912,11 @@ export default function LandingPage() {
 
         <div className="at-2col" style={{ marginTop: "44px", gap: "32px" }}>
           {[
-            ["🎯", "Sesión semanal de 90 min, 1 a 1", "Presencial en Buenos Aires o virtual. No son charlas. Son sesiones de trabajo donde analizamos tu negocio, tomamos decisiones juntos, y definimos qué hacer la próxima semana."],
-            ["⚡", "Feedback directo y honesto", "Te digo lo que funciona y lo que no. Sin vueltas, sin diplomacia innecesaria. Como haría un socio que se juega lo mismo que vos."],
-            ["🧭", "Dirección estratégica", "Qué priorizar, qué dejar, qué cambiar. Basado en experiencia real de operar 3 empresas, no en frameworks teóricos."],
-            ["🤖", "Herramientas tech e IA", "Soy tecnológico (Desarrollador Senior) y fundé una software factory. Te muestro herramientas que la mayoría de los emprendedores no conocen y que te ahorran horas cada semana."],
-            ["💬", "Soporte por WhatsApp", "Si surge algo urgente entre sesiones, me escribís y te respondo en menos de 24 horas."],
+            ["🎯", "Sesión semanal de 90 min, 1 a 1", "Presencial en Buenos Aires o virtual. No son charlas, son sesiones de trabajo. Cada semana decidimos qué mover."],
+            ["⚡", "Feedback directo y honesto", "Te digo lo que funciona y lo que no. Sin diplomacia innecesaria. Como un socio que se juega lo mismo que vos."],
+            ["🧭", "Dirección estratégica", "Qué priorizar, qué dejar, qué cambiar. Basado en operar 3 empresas, no en frameworks teóricos."],
+            ["🤖", "Herramientas tech e IA", "Soy tecnológico (Desarrollador Senior) y fundé una software factory. Te muestro herramientas que la mayoría no conoce y te ahorran horas cada semana."],
+            ["💬", "Soporte por WhatsApp", "Si surge algo urgente entre sesiones, me escribís. Respondo en menos de 24 horas."],
             ["📋", "Plan de acción semanal", "Cada sesión termina con metas claras. No salís sin saber qué hacer."],
           ].map(([icon, title, desc], i) => (
             <FadeIn key={i} delay={i * 0.08}>
@@ -956,8 +972,24 @@ export default function LandingPage() {
               ["Tiene presión.", "No es un espacio cómodo donde te digo lo que querés escuchar. Es un espacio de trabajo donde te empujo a tomar las decisiones que sabés que tenés que tomar."],
             ].map(([t, d], i) => (
               <FadeIn key={i} delay={i * 0.1}>
-                <div className="at-reason-card">
-                  <h4 style={{ fontSize: "17px", fontWeight: 700, color: COLORS.purpleLight, marginBottom: "8px" }}>{t}</h4>
+                <div className="at-reason-card" style={{ position: "relative", paddingTop: "32px" }}>
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "20px",
+                      right: "24px",
+                      fontFamily: "'Playfair Display', serif",
+                      fontStyle: "italic",
+                      fontSize: "44px",
+                      lineHeight: 1,
+                      fontWeight: 700,
+                      color: COLORS.gold + "55",
+                      letterSpacing: "-2px",
+                    }}
+                  >
+                    0{i + 1}
+                  </span>
+                  <h4 style={{ fontSize: "17px", fontWeight: 700, color: COLORS.purpleLight, marginBottom: "8px", paddingRight: "60px" }}>{t}</h4>
                   <p style={{ fontSize: "15px", color: COLORS.gray, lineHeight: 1.7 }}>{d}</p>
                 </div>
               </FadeIn>
@@ -1141,6 +1173,27 @@ export default function LandingPage() {
                   ¿Y si pudieras tener todo eso, estrategia, operación, tech y presión, por una fracción del costo, con alguien que realmente opera empresas?
                 </p>
               </FadeIn>
+
+              {/* Separador VS solo visible en desktop, hace de puente entre comparativa y price card */}
+              <FadeIn delay={0.35}>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "32px" }}>
+                  <span style={{ flex: 1, height: "1px", background: `linear-gradient(90deg, transparent, ${COLORS.goldDark}40)` }} />
+                  <span style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontStyle: "italic",
+                    fontSize: "20px",
+                    fontWeight: 700,
+                    color: COLORS.goldDark,
+                    letterSpacing: "1px",
+                  }}>
+                    vs.
+                  </span>
+                  <span style={{ flex: 1, height: "1px", background: `linear-gradient(90deg, ${COLORS.goldDark}40, transparent)` }} />
+                </div>
+                <p style={{ fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase", color: COLORS.goldDark, fontWeight: 700, textAlign: "center", marginTop: "12px" }}>
+                  Lo que cuesta trabajar con Alan →
+                </p>
+              </FadeIn>
             </div>
 
             {/* COLUMNA DERECHA — Price card (queda dark para impacto premium del precio) */}
@@ -1316,8 +1369,11 @@ export default function LandingPage() {
       <section id="cta" className="at-section-pad" style={{ background: `linear-gradient(180deg, ${COLORS.bg} 0%, ${COLORS.bgCard}40 50%, ${COLORS.bg} 100%)` }}>
         <div style={{ maxWidth: "680px", margin: "0 auto", textAlign: "center" }}>
           <FadeIn>
-            <div style={{ width: "96px", height: "96px", margin: "0 auto 24px", borderRadius: "50%", overflow: "hidden", border: `2px solid ${COLORS.gold}60`, boxShadow: `0 10px 40px ${COLORS.purple}30` }}>
-              <Photo src="fotos/alan-avatar.jpg" alt="Alan Tapia" aspectRatio="1/1" fallbackInitials="AT" accentColor="gold" style={{ borderRadius: 0, border: "none", boxShadow: "none" }} />
+            <div style={{ position: "relative", width: "128px", height: "128px", margin: "0 auto 28px" }}>
+              <div style={{ position: "absolute", inset: "-12px", borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.gold}30 0%, transparent 60%)`, filter: "blur(8px)", pointerEvents: "none" }} />
+              <div style={{ position: "absolute", inset: "0", borderRadius: "50%", overflow: "hidden", border: `2px solid ${COLORS.gold}80`, boxShadow: `0 16px 60px ${COLORS.purple}40, 0 0 0 6px ${COLORS.bg}, 0 0 0 7px ${COLORS.gold}20` }}>
+                <Photo src="fotos/alan-avatar.jpg" alt="Alan Tapia" aspectRatio="1/1" fallbackInitials="AT" accentColor="gold" style={{ borderRadius: 0, border: "none", boxShadow: "none" }} />
+              </div>
             </div>
           </FadeIn>
           <FadeIn delay={0.1}>
