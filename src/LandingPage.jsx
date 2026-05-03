@@ -324,8 +324,9 @@ export default function LandingPage() {
         details summary::-webkit-details-marker { display: none; }
         details[open] .at-faq-chevron { transform: rotate(45deg); background: ${COLORS.purple}30 !important; }
         @media (min-width: 720px) { .at-speaker-card { grid-template-columns: 360px 1fr !important; gap: 40px !important; } }
-        .at-events-grid { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
-        @media (min-width: 900px) { .at-events-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+        .at-events-grid { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+        @media (min-width: 720px) { .at-events-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+        @media (min-width: 1100px) { .at-events-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
         .at-sticky-cta {
           position: fixed; left: 0; right: 0; bottom: 0;
           padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -823,21 +824,45 @@ export default function LandingPage() {
                 },
                 {
                   src: "fotos/event-2.jpg",
-                  fallbackEmoji: "🤖",
-                  caption: "IA aplicada a operaciones",
-                  meta: "Capacitación corporativa",
+                  fallbackEmoji: "🎙️",
+                  caption: "Charla en vivo",
+                  meta: "Founders & escala",
                 },
                 {
                   src: "fotos/event-3.jpg",
                   fallbackEmoji: "📺",
-                  caption: "Charla sobre founders",
-                  meta: "Panel de emprendedores",
+                  caption: "Panel de líderes",
+                  meta: "Networking empresarial",
                 },
                 {
                   src: "fotos/event-4.jpg",
-                  fallbackEmoji: "🎙️",
-                  caption: "Podcast tech y negocios",
-                  meta: "Entrevista en vivo",
+                  fallbackEmoji: "🤖",
+                  caption: "IA aplicada a negocios",
+                  meta: "Capacitación corporativa",
+                },
+                {
+                  src: "fotos/event-5.jpg",
+                  fallbackEmoji: "💼",
+                  caption: "Encuentro de founders",
+                  meta: "Operación y liderazgo",
+                },
+                {
+                  src: "fotos/event-6.jpg",
+                  fallbackEmoji: "🚀",
+                  caption: "Mentoría en evento",
+                  meta: "Equipo y escala",
+                },
+                {
+                  src: "fotos/event-7.jpg",
+                  fallbackEmoji: "🎯",
+                  caption: "Speaker invitado",
+                  meta: "Tech y operaciones",
+                },
+                {
+                  src: "fotos/event-8.jpg",
+                  fallbackEmoji: "🏆",
+                  caption: "Charla magistral",
+                  meta: "Negocios e IA",
                 },
               ].map((ev, i) => (
                 <FadeIn key={i} delay={i * 0.08}>
