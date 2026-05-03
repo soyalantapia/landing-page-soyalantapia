@@ -317,6 +317,8 @@ export default function LandingPage() {
         .at-quote-grid { grid-template-columns: 1fr !important; }
         @media (min-width: 720px) { .at-quote-grid { grid-template-columns: 1fr 1fr !important; } }
         @media (min-width: 1100px) { .at-quote-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+        .at-objectives-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+        @media (min-width: 720px) { .at-objectives-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
         .at-sticky-cta {
           position: fixed; left: 0; right: 0; bottom: 0;
           padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -746,18 +748,112 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* OBJETIVO ACTUAL + QUOTE */}
-          <FadeIn delay={0.3}>
-            <div style={{ marginTop: "56px", padding: "32px", borderRadius: "16px", background: `linear-gradient(135deg, ${COLORS.purple}10, ${COLORS.gold}06)`, border: `1px solid ${COLORS.gold}25` }}>
-              <p style={{ fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase", color: COLORS.gold, fontWeight: 600, marginBottom: "16px" }}>Mi objetivo hoy</p>
-              <p style={{ fontSize: "17px", color: COLORS.grayLight, lineHeight: 1.8 }}>
-                Convertirme en <strong style={{ color: COLORS.white }}>referente del sector empresarial</strong> en LATAM, ayudar a emprendedores a hacer lo que tanto sueñan, y — fuera de los negocios — convertirme en el próximo <strong style={{ color: COLORS.white }}>campeón argentino de boxeo</strong>. No es metáfora. Entreno todos los días.
-              </p>
-              <p style={{ fontSize: "16px", color: COLORS.gray, lineHeight: 1.7, marginTop: "24px", fontStyle: "italic", borderLeft: `3px solid ${COLORS.gold}`, paddingLeft: "20px" }}>
-                "No te voy a dar teoría de un libro. Te voy a dar exactamente lo que uso todos los días para operar mis propias empresas y ganar peleas."
-              </p>
+          {/* OBJETIVO ACTUAL — 3 pilares + statement final */}
+          <div style={{ marginTop: "72px" }}>
+            <FadeIn>
+              <p style={{ fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase", color: COLORS.gold, fontWeight: 600, marginBottom: "20px" }}>Mi objetivo hoy</p>
+              <h3 style={{ fontSize: "clamp(24px, 3.2vw, 36px)", fontWeight: 700, color: COLORS.white, lineHeight: 1.2, letterSpacing: "-0.5px", maxWidth: "780px" }}>
+                Tres cosas que persigo todos los días.
+              </h3>
+            </FadeIn>
+
+            <div className="at-objectives-grid" style={{ marginTop: "36px" }}>
+              {[
+                {
+                  icon: "🌎",
+                  accent: "purple",
+                  title: "Referente empresarial en LATAM",
+                  desc: "Construir credibilidad real, basada en operar y compartir lo que aprendo cada día.",
+                },
+                {
+                  icon: "🚀",
+                  accent: "gold",
+                  title: "Que más founders escalen sus negocios",
+                  desc: "Pasar todo lo que me costó aprender al equipo de cada cliente, para que avancen más rápido.",
+                },
+                {
+                  icon: "🥊",
+                  accent: "purple",
+                  title: "Campeón argentino de boxeo",
+                  desc: "No es metáfora. Entreno todos los días. La disciplina del ring es la misma que la del founder.",
+                },
+              ].map((o, i) => {
+                const accent = o.accent === "gold" ? COLORS.gold : COLORS.purpleLight;
+                return (
+                  <FadeIn key={o.title} delay={0.1 + i * 0.08}>
+                    <div
+                      style={{
+                        padding: "24px 22px",
+                        borderRadius: "16px",
+                        background: COLORS.bgCard,
+                        border: `1px solid ${COLORS.border}`,
+                        height: "100%",
+                        transition: "border-color 0.3s, transform 0.3s",
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = accent + "55"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.transform = "translateY(0)"; }}
+                    >
+                      <div
+                        style={{
+                          width: "44px", height: "44px", borderRadius: "12px",
+                          background: `${accent}15`, border: `1px solid ${accent}25`,
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          fontSize: "22px", marginBottom: "16px",
+                        }}
+                      >
+                        {o.icon}
+                      </div>
+                      <h4 style={{ fontSize: "16px", fontWeight: 700, color: COLORS.white, marginBottom: "8px", lineHeight: 1.3 }}>{o.title}</h4>
+                      <p style={{ fontSize: "14px", color: COLORS.grayLight, lineHeight: 1.65, fontWeight: 450 }}>{o.desc}</p>
+                    </div>
+                  </FadeIn>
+                );
+              })}
             </div>
-          </FadeIn>
+
+            {/* Quote final como statement editorial */}
+            <FadeIn delay={0.4}>
+              <div
+                style={{
+                  marginTop: "56px",
+                  textAlign: "center",
+                  maxWidth: "820px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  position: "relative",
+                }}
+              >
+                <div
+                  style={{
+                    width: "60px",
+                    height: "3px",
+                    background: `linear-gradient(90deg, ${COLORS.gold}, ${COLORS.purple})`,
+                    borderRadius: "2px",
+                    margin: "0 auto 28px",
+                  }}
+                />
+                <p
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "clamp(22px, 2.8vw, 32px)",
+                    color: COLORS.white,
+                    lineHeight: 1.4,
+                    fontWeight: 500,
+                    letterSpacing: "-0.3px",
+                    fontStyle: "italic",
+                  }}
+                >
+                  No te voy a dar teoría de un libro. Te voy a dar exactamente lo que uso todos los días para{" "}
+                  <span style={{ color: COLORS.gold, fontWeight: 600 }}>operar mis empresas</span>{" "}
+                  y{" "}
+                  <span style={{ color: COLORS.purpleLight, fontWeight: 600 }}>ganar peleas</span>.
+                </p>
+                <p style={{ marginTop: "20px", fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase", color: COLORS.gray, fontWeight: 600, fontStyle: "normal" }}>
+                  Alan Tapia
+                </p>
+              </div>
+            </FadeIn>
+          </div>
         </div>
       </section>
 
@@ -803,7 +899,7 @@ export default function LandingPage() {
             ["🎯", "Sesión semanal de 90 min, 1 a 1", "Presencial en Buenos Aires o virtual. No son charlas. Son sesiones de trabajo donde analizamos tu negocio, tomamos decisiones juntos, y definimos qué hacer la próxima semana."],
             ["⚡", "Feedback directo y honesto", "Te digo lo que funciona y lo que no. Sin vueltas, sin diplomacia innecesaria. Como haría un socio que se juega lo mismo que vos."],
             ["🧭", "Dirección estratégica", "Qué priorizar, qué dejar, qué cambiar. Basado en experiencia real de operar 3 empresas, no en frameworks teóricos."],
-            ["🤖", "Herramientas tech e IA", "Soy desarrollador y fundé una software factory. Te muestro herramientas que la mayoría de los emprendedores no conocen y que te ahorran horas cada semana."],
+            ["🤖", "Herramientas tech e IA", "Soy tecnológico (Desarrollador Senior) y fundé una software factory. Te muestro herramientas que la mayoría de los emprendedores no conocen y que te ahorran horas cada semana."],
             ["💬", "Soporte por WhatsApp", "Si surge algo urgente entre sesiones, me escribís y te respondo en menos de 24 horas."],
             ["📋", "Plan de acción semanal", "Cada sesión termina con metas claras. No salís sin saber qué hacer."],
           ].map(([icon, title, desc], i) => (
