@@ -314,6 +314,9 @@ export default function LandingPage() {
         @media (min-width: 1100px) { .at-testimonial-grid { grid-template-columns: repeat(4, 1fr); } }
         .at-testimonial-layout { display: grid !important; gap: 32px !important; grid-template-columns: 1fr !important; }
         @media (min-width: 900px) { .at-testimonial-layout { grid-template-columns: minmax(320px, 400px) 1fr !important; gap: 40px !important; align-items: start !important; } }
+        .at-quote-grid { grid-template-columns: 1fr !important; }
+        @media (min-width: 720px) { .at-quote-grid { grid-template-columns: 1fr 1fr !important; } }
+        @media (min-width: 1100px) { .at-quote-grid { grid-template-columns: repeat(3, 1fr) !important; } }
         .at-sticky-cta {
           position: fixed; left: 0; right: 0; bottom: 0;
           padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -514,6 +517,7 @@ export default function LandingPage() {
               "Tomás decisiones importantes solo, sin alguien que te desafíe o te dé perspectiva.",
               "Ves competidores que crecen más rápido con menos producto y te preguntás qué carajo estás haciendo mal.",
               "Conseguís clientes pero de forma irregular, sin un proceso que funcione solo.",
+              "Trabajás más horas que nunca pero la facturación no crece al mismo ritmo.",
               "Sentís que estás dejando plata sobre la mesa todos los meses.",
             ].map((t, i) => (
               <FadeIn key={i} delay={i * 0.08}>
@@ -819,9 +823,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* TESTIMONIOS — 1 video destacado + 3 quotes con foto+nombre.
-          Cuando lleguen los 3 IDs reales de YouTube (LP-VIDEOS SOY-77),
-          cambiar HEADLINE_VIDEO_ID y agregar más videos en el grid abajo. */}
+      {/* TESTIMONIOS — 4 videos en grid + 3 quotes escritos abajo.
+          Reemplazar los 4 video IDs cuando lleguen los reales (LP-VIDEOS SOY-77). */}
       <section className="at-section-pad">
         <div className="at-fit-wide">
           <FadeIn>
@@ -832,104 +835,121 @@ export default function LandingPage() {
             </h2>
           </FadeIn>
 
-          <div className="at-testimonial-layout" style={{ marginTop: "44px" }}>
-            {/* Video destacado a la izquierda */}
-            <FadeIn delay={0.1}>
-              <div
-                style={{
-                  borderRadius: "20px", overflow: "hidden",
-                  border: `1px solid ${COLORS.gold}30`,
-                  background: COLORS.bgCard,
-                  boxShadow: `0 30px 80px -25px ${COLORS.gold}25`,
-                  position: "relative",
-                  maxWidth: "420px",
-                  margin: "0 auto",
-                  width: "100%",
-                }}
-              >
-                <div style={{ position: "relative", width: "100%", paddingBottom: "177.78%", background: "#000" }}>
-                  <iframe
-                    src="https://www.youtube.com/embed/AaQ_2e0FVuo"
-                    title="Testimonio destacado"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
-                  />
+          {/* Grid 4 videos */}
+          <div className="at-testimonial-grid" style={{ marginTop: "44px" }}>
+            {[
+              { videoId: "AaQ_2e0FVuo", label: "Manuel S.", role: "Agencia digital" },
+              { videoId: "AaQ_2e0FVuo", label: "Agustín G.", role: "SaaS B2B" },
+              { videoId: "AaQ_2e0FVuo", label: "Julián R.", role: "Profesional construyendo" },
+              { videoId: "AaQ_2e0FVuo", label: "Sofía M.", role: "Educadora / creadora" },
+            ].map((v, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div
+                  style={{
+                    borderRadius: "16px", overflow: "hidden",
+                    border: `1px solid ${COLORS.border}`,
+                    background: COLORS.bgCard,
+                    transition: "border-color 0.3s, transform 0.3s",
+                    height: "100%", display: "flex", flexDirection: "column",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = COLORS.purple + "40"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.transform = "translateY(0)"; }}
+                >
+                  <div style={{ position: "relative", width: "100%", paddingBottom: "177.78%", background: "#000" }}>
+                    <iframe
+                      src={`https://www.youtube.com/embed/${v.videoId}`}
+                      title={`Testimonio ${v.label}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+                    />
+                  </div>
+                  <div style={{ padding: "14px 16px", borderTop: `1px solid ${COLORS.border}` }}>
+                    <p style={{ fontSize: "14px", fontWeight: 600, color: COLORS.white }}>{v.label}</p>
+                    <p style={{ fontSize: "12px", color: COLORS.gray, marginTop: "2px" }}>{v.role}</p>
+                  </div>
                 </div>
-                <div style={{ padding: "16px 20px", background: `linear-gradient(135deg, ${COLORS.gold}10, transparent)`, borderTop: `1px solid ${COLORS.gold}20` }}>
-                  <p style={{ fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: COLORS.gold, fontWeight: 600 }}>Testimonio destacado</p>
-                  <p style={{ fontSize: "14px", color: COLORS.grayLight, marginTop: "4px" }}>Cliente actual del programa</p>
-                </div>
-              </div>
-            </FadeIn>
+              </FadeIn>
+            ))}
+          </div>
 
-            {/* 3 testimonios escritos */}
-            <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr" }}>
-              {[
-                {
-                  initials: "MS",
-                  name: "Manuel S.",
-                  role: "Founder de agencia digital · Buenos Aires",
-                  accent: "gold",
-                  quote: "Cuando arranqué con Alan estaba quemado, atendiendo todo yo. En 6 semanas armamos el proceso comercial y el sistema de delegación. Hoy mi agencia factura más sin que yo esté en cada llamada.",
-                },
-                {
-                  initials: "AG",
-                  name: "Agustín G.",
-                  role: "Founder de SaaS B2B · Córdoba",
-                  accent: "purple",
-                  quote: "No es coaching motivacional. Cada sesión salgo con 3 cosas concretas para hacer la semana siguiente. Alan opera 3 empresas, no te habla desde un libro, te habla desde lo que vive todos los días.",
-                },
-                {
-                  initials: "JR",
-                  name: "Julián R.",
-                  role: "Profesional construyendo su propio proyecto",
-                  accent: "gold",
-                  quote: "Pagaba una consultora top tier $4.000 al mes y recibía un PowerPoint cada quincena. Con Alan paso una hora y media a la semana resolviendo problemas reales. Es otra liga.",
-                },
-              ].map((t, i) => {
-                const accent = t.accent === "gold" ? COLORS.gold : COLORS.purpleLight;
-                return (
-                  <FadeIn key={t.name} delay={0.15 + i * 0.08}>
-                    <div
-                      style={{
-                        padding: "20px 22px",
-                        borderRadius: "14px",
-                        background: COLORS.bgCard,
-                        border: `1px solid ${COLORS.border}`,
-                        transition: "border-color 0.3s, transform 0.3s",
-                      }}
-                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = accent + "55"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.transform = "translateY(0)"; }}
-                    >
-                      <p style={{ fontSize: "15px", color: COLORS.grayLight, lineHeight: 1.6, fontWeight: 450, marginBottom: "16px" }}>
-                        {t.quote}
-                      </p>
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                        <div
-                          style={{
-                            width: "38px", height: "38px", minWidth: "38px",
-                            borderRadius: "50%",
-                            background: `linear-gradient(135deg, ${accent}40, ${accent}15)`,
-                            border: `1px solid ${accent}50`,
-                            display: "flex", alignItems: "center", justifyContent: "center",
-                            fontFamily: "'Playfair Display', serif",
-                            fontStyle: "italic", fontWeight: 700,
-                            color: accent, fontSize: "15px",
-                          }}
-                        >
-                          {t.initials}
-                        </div>
-                        <div>
-                          <p style={{ fontSize: "14px", fontWeight: 600, color: COLORS.white }}>{t.name}</p>
-                          <p style={{ fontSize: "12px", color: COLORS.gray }}>{t.role}</p>
-                        </div>
+          {/* 3 quotes escritos en grid simétrico */}
+          <div
+            style={{
+              marginTop: "48px",
+              display: "grid",
+              gap: "20px",
+              gridTemplateColumns: "1fr",
+            }}
+            className="at-quote-grid"
+          >
+            {[
+              {
+                initials: "MS",
+                name: "Manuel S.",
+                role: "Founder de agencia digital · Buenos Aires",
+                accent: "gold",
+                quote: "Cuando arranqué con Alan estaba quemado, atendiendo todo yo. En 6 semanas armamos el proceso comercial y el sistema de delegación. Hoy mi agencia factura más sin que yo esté en cada llamada.",
+              },
+              {
+                initials: "AG",
+                name: "Agustín G.",
+                role: "Founder de SaaS B2B · Córdoba",
+                accent: "purple",
+                quote: "No es coaching motivacional. Cada sesión salgo con 3 cosas concretas para hacer la semana siguiente. Alan opera 3 empresas, no te habla desde un libro, te habla desde lo que vive todos los días.",
+              },
+              {
+                initials: "JR",
+                name: "Julián R.",
+                role: "Profesional construyendo su propio proyecto",
+                accent: "gold",
+                quote: "Pagaba una consultora top tier al mes y recibía un PowerPoint cada quincena. Con Alan paso una hora y media a la semana resolviendo problemas reales. Es otra liga.",
+              },
+            ].map((t, i) => {
+              const accent = t.accent === "gold" ? COLORS.gold : COLORS.purpleLight;
+              return (
+                <FadeIn key={t.name} delay={0.45 + i * 0.08}>
+                  <div
+                    style={{
+                      padding: "24px 26px",
+                      borderRadius: "16px",
+                      background: COLORS.bgCard,
+                      border: `1px solid ${COLORS.border}`,
+                      transition: "border-color 0.3s, transform 0.3s",
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = accent + "55"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.transform = "translateY(0)"; }}
+                  >
+                    <p style={{ fontSize: "15px", color: COLORS.grayLight, lineHeight: 1.65, fontWeight: 450, marginBottom: "20px", flex: 1 }}>
+                      {t.quote}
+                    </p>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                      <div
+                        style={{
+                          width: "40px", height: "40px", minWidth: "40px",
+                          borderRadius: "50%",
+                          background: `linear-gradient(135deg, ${accent}40, ${accent}15)`,
+                          border: `1px solid ${accent}50`,
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          fontFamily: "'Playfair Display', serif",
+                          fontStyle: "italic", fontWeight: 700,
+                          color: accent, fontSize: "15px",
+                        }}
+                      >
+                        {t.initials}
+                      </div>
+                      <div>
+                        <p style={{ fontSize: "14px", fontWeight: 600, color: COLORS.white }}>{t.name}</p>
+                        <p style={{ fontSize: "12px", color: COLORS.gray }}>{t.role}</p>
                       </div>
                     </div>
-                  </FadeIn>
-                );
-              })}
-            </div>
+                  </div>
+                </FadeIn>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1057,50 +1077,95 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* PARA QUIÉN */}
-      <section className="at-section-pad">
+      {/* PARA QUIÉN — 6 vs 6 simétrico */}
+      <section className="at-section-pad" style={{ background: `linear-gradient(180deg, ${COLORS.bg} 0%, ${COLORS.bgCard}40 50%, ${COLORS.bg} 100%)` }}>
         <div className="at-fit-wide">
-        <FadeIn>
-          <Badge>Para quién es</Badge>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px" }}>
-            Esto es para vos si...
-          </h2>
-        </FadeIn>
-        <div className="at-fit-grid" style={{ marginTop: "28px" }}>
-          <FadeIn delay={0.1}>
-            <div style={{ padding: "24px", borderRadius: "14px", background: `${COLORS.purple}08`, border: `1px solid ${COLORS.purple}25`, height: "100%" }}>
-              <p style={{ fontSize: "13px", fontWeight: 700, color: COLORS.purpleLight, marginBottom: "16px", letterSpacing: "1px", textTransform: "uppercase" }}>Sí es para vos</p>
-              {[
-                "Ya tenés un negocio funcionando y facturando",
-                "Querés crecer más rápido pero no sabés qué palanca mover",
-                "Estás dispuesto a trabajar duro durante 12 semanas",
-                "Valorás tener a alguien con experiencia empujando con vos",
-                "Querés resultados, no teoría",
-              ].map((t, i) => (
-                <div key={i} style={{ display: "flex", gap: "10px", marginBottom: "14px" }}>
-                  <span style={{ color: COLORS.purpleLight, fontWeight: 700, fontSize: "16px" }}>✓</span>
-                  <span style={{ fontSize: "14px", color: COLORS.grayLight, lineHeight: 1.6 }}>{t}</span>
-                </div>
-              ))}
+          <FadeIn>
+            <div style={{ textAlign: "center", marginBottom: "8px" }}>
+              <Badge>Filtro de claridad</Badge>
             </div>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px", textAlign: "center", maxWidth: "780px", marginLeft: "auto", marginRight: "auto" }}>
+              ¿Es para vos?{" "}
+              <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold }}>Decidí en 30 segundos.</span>
+            </h2>
+            <p style={{ fontSize: "16px", color: COLORS.gray, lineHeight: 1.7, marginTop: "16px", textAlign: "center", maxWidth: "640px", marginLeft: "auto", marginRight: "auto" }}>
+              Esto no es para todos. Si te identificás con la columna de la izquierda, hablemos.
+            </p>
           </FadeIn>
-          <FadeIn delay={0.2}>
-            <div style={{ padding: "24px", borderRadius: "14px", background: `${COLORS.bgCard}80`, border: `1px solid ${COLORS.border}`, height: "100%" }}>
-              <p style={{ fontSize: "13px", fontWeight: 700, color: COLORS.gray, marginBottom: "16px", letterSpacing: "1px", textTransform: "uppercase" }}>No es para vos si...</p>
-              {[
-                "Todavía estás en la etapa de idea sin clientes",
-                "Buscás fórmulas mágicas o atajos",
-                "Querés que alguien haga el trabajo por vos",
-                "No podés dedicar 90 min semanales",
-              ].map((t, i) => (
-                <div key={i} style={{ display: "flex", gap: "10px", marginBottom: "14px" }}>
-                  <span style={{ color: COLORS.grayDark, fontWeight: 700, fontSize: "16px" }}>✗</span>
-                  <span style={{ fontSize: "14px", color: COLORS.grayDark, lineHeight: 1.6 }}>{t}</span>
+
+          <div className="at-2col" style={{ marginTop: "44px", alignItems: "stretch" }}>
+            <FadeIn delay={0.1}>
+              <div
+                style={{
+                  padding: "32px 28px",
+                  borderRadius: "18px",
+                  background: `linear-gradient(180deg, ${COLORS.purple}10 0%, ${COLORS.bgCard} 100%)`,
+                  border: `1px solid ${COLORS.purple}40`,
+                  height: "100%",
+                  boxShadow: `0 30px 60px -30px ${COLORS.purple}40`,
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
+                  <span style={{
+                    width: "32px", height: "32px", borderRadius: "50%",
+                    background: `linear-gradient(135deg, ${COLORS.purple}, ${COLORS.purpleDark})`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    color: "#fff", fontSize: "16px", fontWeight: 700,
+                  }}>✓</span>
+                  <p style={{ fontSize: "13px", fontWeight: 700, color: COLORS.purpleLight, letterSpacing: "1.5px", textTransform: "uppercase" }}>Sí es para vos</p>
                 </div>
-              ))}
-            </div>
-          </FadeIn>
-        </div>
+                {[
+                  "Ya tenés un negocio funcionando y facturando",
+                  "Querés crecer más rápido pero no sabés qué palanca mover",
+                  "Tomás decisiones importantes solo y querés un par senior al lado",
+                  "Estás dispuesto a trabajar duro durante 12 semanas",
+                  "Valorás feedback directo más que palmadas en la espalda",
+                  "Querés resultados concretos, no teoría",
+                ].map((t, i) => (
+                  <div key={i} style={{ display: "flex", gap: "12px", marginBottom: "14px", alignItems: "flex-start" }}>
+                    <span style={{ color: COLORS.purpleLight, fontWeight: 700, fontSize: "15px", marginTop: "1px", flexShrink: 0 }}>✓</span>
+                    <span style={{ fontSize: "15px", color: COLORS.grayLight, lineHeight: 1.6, fontWeight: 450 }}>{t}</span>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <div
+                style={{
+                  padding: "32px 28px",
+                  borderRadius: "18px",
+                  background: `${COLORS.bgCard}80`,
+                  border: `1px solid ${COLORS.border}`,
+                  height: "100%",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px" }}>
+                  <span style={{
+                    width: "32px", height: "32px", borderRadius: "50%",
+                    background: `${COLORS.grayDark}30`,
+                    border: `1px solid ${COLORS.grayDark}60`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    color: COLORS.gray, fontSize: "16px", fontWeight: 700,
+                  }}>✗</span>
+                  <p style={{ fontSize: "13px", fontWeight: 700, color: COLORS.gray, letterSpacing: "1.5px", textTransform: "uppercase" }}>No es para vos si...</p>
+                </div>
+                {[
+                  "Todavía estás en la etapa de idea sin clientes",
+                  "Buscás fórmulas mágicas o atajos rápidos",
+                  "Querés que alguien haga el trabajo por vos",
+                  "No podés dedicar 90 minutos por semana al menos",
+                  "Esperás resultados sin ejecutar lo que charlamos",
+                  "Te molesta que te digan lo que no querés escuchar",
+                ].map((t, i) => (
+                  <div key={i} style={{ display: "flex", gap: "12px", marginBottom: "14px", alignItems: "flex-start" }}>
+                    <span style={{ color: COLORS.grayDark, fontWeight: 700, fontSize: "15px", marginTop: "1px", flexShrink: 0 }}>✗</span>
+                    <span style={{ fontSize: "15px", color: COLORS.gray, lineHeight: 1.6, fontWeight: 450 }}>{t}</span>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
         </div>
       </section>
 
