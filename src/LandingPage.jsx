@@ -688,7 +688,7 @@ export default function LandingPage() {
             <div>
               <FadeIn delay={0.2}>
                 <p style={{ fontSize: "17px", color: COLORS.grayLight, lineHeight: 1.8 }}>
-                  Vengo de una familia de <strong style={{ color: COLORS.white }}>clase baja baja</strong>, sin recursos ni contactos. El esfuerzo diario nunca fue una elección — era la única manera de no terminar como veía a mi familia luchando para sobrevivir.
+                  Vengo de una familia de <strong style={{ color: COLORS.white }}>clase baja baja</strong>, sin recursos ni contactos. El esfuerzo diario nunca fue una elección. Era la única manera de no terminar como veía a mi familia luchando para sobrevivir.
                 </p>
               </FadeIn>
               <FadeIn delay={0.3}>
@@ -760,22 +760,22 @@ export default function LandingPage() {
             <div className="at-objectives-grid" style={{ marginTop: "36px" }}>
               {[
                 {
+                  icon: "🦄",
+                  accent: "purple",
+                  title: "Crear un unicornio",
+                  desc: "Construir desde Argentina una empresa de impacto global. Tech, IA, escala real.",
+                },
+                {
                   icon: "🌎",
-                  accent: "purple",
-                  title: "Referente empresarial en LATAM",
-                  desc: "Construir credibilidad real, basada en operar y compartir lo que aprendo cada día.",
-                },
-                {
-                  icon: "🚀",
                   accent: "gold",
-                  title: "Que más founders escalen sus negocios",
-                  desc: "Pasar todo lo que me costó aprender al equipo de cada cliente, para que avancen más rápido.",
+                  title: "Ser referente empresarial en LATAM",
+                  desc: "Credibilidad basada en operar todos los días, no en discursos. Compartir lo que funciona y lo que no.",
                 },
                 {
-                  icon: "🥊",
+                  icon: "👥",
                   accent: "purple",
-                  title: "Campeón argentino de boxeo",
-                  desc: "No es metáfora. Entreno todos los días. La disciplina del ring es la misma que la del founder.",
+                  title: "Generar trabajo digno para 1.000 personas",
+                  desc: "Hoy lidero +70. La meta es construir empresas que sostengan miles de familias en LATAM.",
                 },
               ].map((o, i) => {
                 const accent = o.accent === "gold" ? COLORS.gold : COLORS.purpleLight;
@@ -846,7 +846,7 @@ export default function LandingPage() {
                   No te voy a dar teoría de un libro. Te voy a dar exactamente lo que uso todos los días para{" "}
                   <span style={{ color: COLORS.gold, fontWeight: 600 }}>operar mis empresas</span>{" "}
                   y{" "}
-                  <span style={{ color: COLORS.purpleLight, fontWeight: 600 }}>ganar peleas</span>.
+                  <span style={{ color: COLORS.purpleLight, fontWeight: 600 }}>construir lo próximo</span>.
                 </p>
                 <p style={{ marginTop: "20px", fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase", color: COLORS.gray, fontWeight: 600, fontStyle: "normal" }}>
                   Alan Tapia
@@ -950,7 +950,7 @@ export default function LandingPage() {
 
           <div className="at-2col" style={{ marginTop: "44px" }}>
             {[
-              ["Tenés a alguien que juega el mismo juego.", "No un profesor, no un coach, no un motivador. Alguien que lidera equipos, cierra deals y resuelve problemas operativos todos los días — igual que vos."],
+              ["Tenés a alguien que juega el mismo juego.", "No un profesor, no un coach, no un motivador. Alguien que lidera equipos, cierra deals y resuelve problemas operativos todos los días, igual que vos."],
               ["Es trabajo, no teoría.", "Cada sesión es sobre tu negocio. Tus números, tus clientes, tus decisiones. No hay módulos pregrabados ni contenido genérico."],
               ["Incluye tech real.", "La mayoría de los coaches te enseñan estrategia y mentalidad. Yo te muestro cómo automatizar procesos con IA y usar tecnología para ganar velocidad."],
               ["Tiene presión.", "No es un espacio cómodo donde te digo lo que querés escuchar. Es un espacio de trabajo donde te empujo a tomar las decisiones que sabés que tenés que tomar."],
