@@ -17,6 +17,13 @@ const COLORS = {
   border: "rgba(139,92,246,0.15)",
   whatsapp: "#25D366",
   whatsappDark: "#128C7E",
+  // Light theme tokens (para secciones invertidas que rompen monotonia)
+  bgLight: "#F4F4F7",
+  bgLightCard: "#FFFFFF",
+  textOnLight: "#0A0A0F",
+  textOnLightSecondary: "#475569",
+  borderOnLight: "rgba(15,23,42,0.08)",
+  borderOnLightAccent: "rgba(139,92,246,0.22)",
 };
 
 function WhatsAppIcon({ size = 18, color = "#fff" }) {
@@ -27,19 +34,20 @@ function WhatsAppIcon({ size = 18, color = "#fff" }) {
   );
 }
 
-function FadeIn({ children, delay = 0, className = "" }) {
+function FadeIn({ children, delay = 0, className = "", instant = false }) {
   const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+  // Si instant=true (hero / above-the-fold), arranca visible para no dejar pantalla vacía.
+  const [visible, setVisible] = useState(instant);
   const reduced = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   useEffect(() => {
-    if (reduced) { setVisible(true); return; }
+    if (instant || reduced) { setVisible(true); return; }
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } },
       { threshold: 0.15 }
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
-  }, [reduced]);
+  }, [reduced, instant]);
   return (
     <div
       ref={ref}
@@ -55,7 +63,8 @@ function FadeIn({ children, delay = 0, className = "" }) {
   );
 }
 
-function Badge({ children }) {
+function Badge({ children, theme = "dark" }) {
+  const isLight = theme === "light";
   return (
     <span
       style={{
@@ -66,9 +75,9 @@ function Badge({ children }) {
         fontWeight: 600,
         letterSpacing: "1.5px",
         textTransform: "uppercase",
-        color: COLORS.gold,
-        border: `1px solid ${COLORS.gold}40`,
-        background: `${COLORS.gold}10`,
+        color: isLight ? COLORS.goldDark : COLORS.gold,
+        border: `1px solid ${isLight ? COLORS.goldDark + "40" : COLORS.gold + "40"}`,
+        background: isLight ? COLORS.goldDark + "12" : COLORS.gold + "10",
       }}
     >
       {children}
@@ -76,21 +85,29 @@ function Badge({ children }) {
   );
 }
 
-function PhaseCard({ number, title, weeks, description, deliverable, delay }) {
+function PhaseCard({ number, title, weeks, description, deliverable, delay, theme = "dark" }) {
+  const isLight = theme === "light";
   return (
     <FadeIn delay={delay}>
       <div
         style={{
-          background: COLORS.bgCard,
-          border: `1px solid ${COLORS.border}`,
+          background: isLight ? COLORS.bgLightCard : COLORS.bgCard,
+          border: `1px solid ${isLight ? COLORS.borderOnLight : COLORS.border}`,
           borderRadius: "16px",
           padding: "32px",
           position: "relative",
           overflow: "hidden",
-          transition: "border-color 0.3s",
+          transition: "border-color 0.3s, box-shadow 0.3s",
+          boxShadow: isLight ? "0 1px 2px rgba(15,23,42,0.04)" : "none",
         }}
-        onMouseEnter={(e) => e.currentTarget.style.borderColor = COLORS.purple + "60"}
-        onMouseLeave={(e) => e.currentTarget.style.borderColor = COLORS.border}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = isLight ? COLORS.purple + "55" : COLORS.purple + "60";
+          if (isLight) e.currentTarget.style.boxShadow = "0 16px 40px -16px rgba(139,92,246,0.25)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = isLight ? COLORS.borderOnLight : COLORS.border;
+          if (isLight) e.currentTarget.style.boxShadow = "0 1px 2px rgba(15,23,42,0.04)";
+        }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
           <span
@@ -103,26 +120,27 @@ function PhaseCard({ number, title, weeks, description, deliverable, delay }) {
           >
             {number}
           </span>
-          <span style={{ fontSize: "12px", color: COLORS.gray, fontWeight: 500, letterSpacing: "0.5px" }}>
+          <span style={{ fontSize: "12px", color: isLight ? COLORS.textOnLightSecondary : COLORS.gray, fontWeight: 500, letterSpacing: "0.5px" }}>
             {weeks}
           </span>
         </div>
-        <h3 style={{ fontSize: "20px", fontWeight: 700, color: COLORS.white, marginBottom: "12px", lineHeight: 1.3 }}>
+        <h3 style={{ fontSize: "20px", fontWeight: 700, color: isLight ? COLORS.textOnLight : COLORS.white, marginBottom: "12px", lineHeight: 1.3 }}>
           {title}
         </h3>
-        <p style={{ fontSize: "15px", color: COLORS.gray, lineHeight: 1.7, marginBottom: "16px" }}>
+        <p style={{ fontSize: "15px", color: isLight ? COLORS.textOnLightSecondary : COLORS.gray, lineHeight: 1.7, marginBottom: "16px", fontWeight: isLight ? 450 : 400 }}>
           {description}
         </p>
         <div
           style={{
             padding: "12px 16px", borderRadius: "10px",
-            background: `${COLORS.purple}08`, border: `1px solid ${COLORS.purple}15`,
+            background: isLight ? COLORS.purple + "0F" : COLORS.purple + "08",
+            border: `1px solid ${isLight ? COLORS.purple + "22" : COLORS.purple + "15"}`,
           }}
         >
-          <span style={{ fontSize: "11px", fontWeight: 600, color: COLORS.purpleLight, letterSpacing: "1px", textTransform: "uppercase" }}>
+          <span style={{ fontSize: "11px", fontWeight: 600, color: isLight ? COLORS.purpleDark : COLORS.purpleLight, letterSpacing: "1px", textTransform: "uppercase" }}>
             Lo que te llevás
           </span>
-          <p style={{ fontSize: "14px", color: COLORS.grayLight, marginTop: "4px", lineHeight: 1.5 }}>
+          <p style={{ fontSize: "14px", color: isLight ? COLORS.textOnLight : COLORS.grayLight, marginTop: "4px", lineHeight: 1.5 }}>
             {deliverable}
           </p>
         </div>
@@ -131,16 +149,33 @@ function PhaseCard({ number, title, weeks, description, deliverable, delay }) {
   );
 }
 
-function IncludeItem({ icon, title, desc }) {
+function IncludeItem({ icon, title, desc, theme = "dark" }) {
+  const isLight = theme === "light";
   return (
-    <div style={{ display: "flex", gap: "16px", alignItems: "flex-start", padding: "22px 24px", borderRadius: "14px", background: COLORS.bgCard, border: `1px solid ${COLORS.border}`, height: "100%", transition: "border-color 0.3s" }}
-      onMouseEnter={(e) => e.currentTarget.style.borderColor = COLORS.purple + "40"}
-      onMouseLeave={(e) => e.currentTarget.style.borderColor = COLORS.border}
+    <div
+      style={{
+        display: "flex", gap: "16px", alignItems: "flex-start",
+        padding: "22px 24px", borderRadius: "14px",
+        background: isLight ? COLORS.bgLightCard : COLORS.bgCard,
+        border: `1px solid ${isLight ? COLORS.borderOnLight : COLORS.border}`,
+        height: "100%",
+        transition: "border-color 0.3s, box-shadow 0.3s",
+        boxShadow: isLight ? "0 1px 2px rgba(15,23,42,0.04)" : "none",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = isLight ? COLORS.purple + "40" : COLORS.purple + "40";
+        if (isLight) e.currentTarget.style.boxShadow = "0 12px 30px -12px rgba(139,92,246,0.22)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = isLight ? COLORS.borderOnLight : COLORS.border;
+        if (isLight) e.currentTarget.style.boxShadow = "0 1px 2px rgba(15,23,42,0.04)";
+      }}
     >
       <div
         style={{
           width: "44px", height: "44px", minWidth: "44px", borderRadius: "12px",
-          background: `${COLORS.purple}15`, border: `1px solid ${COLORS.purple}20`,
+          background: isLight ? COLORS.purple + "12" : COLORS.purple + "15",
+          border: `1px solid ${isLight ? COLORS.purple + "22" : COLORS.purple + "20"}`,
           display: "flex", alignItems: "center", justifyContent: "center",
           fontSize: "20px",
         }}
@@ -148,8 +183,8 @@ function IncludeItem({ icon, title, desc }) {
         {icon}
       </div>
       <div>
-        <h4 style={{ fontSize: "16px", fontWeight: 600, color: COLORS.white, marginBottom: "6px" }}>{title}</h4>
-        <p style={{ fontSize: "14px", color: COLORS.gray, lineHeight: 1.6 }}>{desc}</p>
+        <h4 style={{ fontSize: "16px", fontWeight: 600, color: isLight ? COLORS.textOnLight : COLORS.white, marginBottom: "6px" }}>{title}</h4>
+        <p style={{ fontSize: "14px", color: isLight ? COLORS.textOnLightSecondary : COLORS.gray, lineHeight: 1.6, fontWeight: isLight ? 450 : 400 }}>{desc}</p>
       </div>
     </div>
   );
@@ -277,6 +312,8 @@ export default function LandingPage() {
         .at-testimonial-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
         @media (min-width: 640px) { .at-testimonial-grid { grid-template-columns: 1fr 1fr; } }
         @media (min-width: 1100px) { .at-testimonial-grid { grid-template-columns: repeat(4, 1fr); } }
+        .at-testimonial-layout { display: grid !important; gap: 32px !important; grid-template-columns: 1fr !important; }
+        @media (min-width: 900px) { .at-testimonial-layout { grid-template-columns: minmax(320px, 400px) 1fr !important; gap: 40px !important; align-items: start !important; } }
         .at-sticky-cta {
           position: fixed; left: 0; right: 0; bottom: 0;
           padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
@@ -291,24 +328,66 @@ export default function LandingPage() {
         @media (min-width: 768px) { .at-sticky-cta { display: none; } }
         .at-hero-pad-bottom { padding-bottom: 80px; }
         @media (max-width: 767px) { .at-hero-pad-bottom { padding-bottom: 100px; } }
+        .at-nav-links { display: none; }
+        @media (min-width: 720px) { .at-nav-links { display: flex !important; } }
+        .at-section-light {
+          background: ${COLORS.bgLight};
+          color: ${COLORS.textOnLight};
+        }
+        html { scroll-padding-top: 80px; }
       `}</style>
 
       {/* NOISE TEXTURE */}
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0, opacity: 0.03, backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} />
 
-      {/* NAV */}
+      {/* NAV — always visible para no romper layout cuando hero arranca grande */}
       <nav
         style={{
           position: "fixed", top: "16px", left: "50%", transform: "translateX(-50%)",
-          zIndex: 100, padding: "12px 28px", borderRadius: "100px",
-          background: scrolled ? "rgba(10,10,15,0.85)" : "transparent",
-          backdropFilter: scrolled ? "blur(20px)" : "none",
-          border: scrolled ? `1px solid ${COLORS.border}` : "1px solid transparent",
+          zIndex: 100, padding: "10px 14px 10px 24px", borderRadius: "100px",
+          background: scrolled ? "rgba(10,10,15,0.92)" : "rgba(10,10,15,0.65)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          border: `1px solid ${scrolled ? COLORS.border : "rgba(255,255,255,0.08)"}`,
+          boxShadow: scrolled ? "0 8px 32px rgba(0,0,0,0.45)" : "0 4px 20px rgba(0,0,0,0.25)",
           display: "flex", alignItems: "center", justifyContent: "space-between",
-          width: "min(600px, 90vw)", transition: "all 0.4s ease",
+          gap: "20px",
+          width: "min(820px, 94vw)", transition: "all 0.4s ease",
         }}
       >
-        <span style={{ fontSize: "15px", fontWeight: 700, letterSpacing: "0.5px", color: COLORS.white }}>ALAN TAPIA</span>
+        <a
+          href="#top"
+          style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "0.5px", color: COLORS.white, textDecoration: "none", whiteSpace: "nowrap" }}
+        >
+          ALAN TAPIA
+        </a>
+
+        <div className="at-nav-links" style={{ display: "flex", alignItems: "center", gap: "22px" }}>
+          {[
+            ["Programa", "#programa"],
+            ["Fases", "#fases"],
+            ["Inversión", "#inversion"],
+          ].map(([label, href]) => (
+            <a
+              key={href}
+              href={href}
+              style={{
+                fontSize: "13px",
+                fontWeight: 500,
+                color: COLORS.grayLight,
+                textDecoration: "none",
+                letterSpacing: "0.2px",
+                transition: "color 0.2s ease",
+                whiteSpace: "nowrap",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = COLORS.white; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = COLORS.grayLight; }}
+            >
+              {label}
+            </a>
+          ))}
+        </div>
+
         <a
           href={whatsappLink}
           target="_blank"
@@ -320,6 +399,7 @@ export default function LandingPage() {
             color: "#fff", textDecoration: "none", letterSpacing: "0.3px",
             transition: "transform 0.2s, box-shadow 0.2s",
             display: "inline-flex", alignItems: "center", gap: "8px",
+            whiteSpace: "nowrap",
           }}
           onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.04)"; e.currentTarget.style.boxShadow = `0 0 20px ${COLORS.purple}40`; }}
           onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "none"; }}
@@ -366,11 +446,11 @@ export default function LandingPage() {
         <div style={{ position: "absolute", bottom: "5%", left: "5%", width: "380px", height: "380px", borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.purple}08 0%, transparent 70%)`, pointerEvents: "none" }} />
 
         <div className="at-hero-text" style={{ textAlign: "center", position: "relative", zIndex: 1 }}>
-          <FadeIn>
+          <FadeIn instant>
             <Badge>Programa de aceleración 1 a 1</Badge>
           </FadeIn>
 
-          <FadeIn delay={0.15}>
+          <FadeIn instant delay={0.15}>
             <h1 style={{ fontSize: "clamp(40px, 7.5vw, 96px)", fontWeight: 700, lineHeight: 1.05, marginTop: "32px", letterSpacing: "-2px" }}>
               12 semanas con un{" "}
               <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", background: `linear-gradient(135deg, ${COLORS.gold}, ${COLORS.goldLight})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
@@ -380,13 +460,13 @@ export default function LandingPage() {
             </h1>
           </FadeIn>
 
-          <FadeIn delay={0.3}>
+          <FadeIn instant delay={0.3}>
             <p style={{ fontSize: "clamp(16px, 1.6vw, 22px)", color: COLORS.gray, lineHeight: 1.65, marginTop: "32px", maxWidth: "740px", marginLeft: "auto", marginRight: "auto" }}>
               No es acompañamiento genérico. Es sentarme con vos, mirar tus números, y decidir juntos qué mover esta semana para que tu negocio facture más.
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.45}>
+          <FadeIn instant delay={0.45}>
             <div style={{ display: "flex", gap: "clamp(24px, 5vw, 56px)", justifyContent: "center", marginTop: "32px", flexWrap: "wrap" }}>
               {[["3", "empresas"], ["+70", "personas"], ["11", "años emprendiendo"]].map(([n, l]) => (
                 <div key={l} style={{ textAlign: "center" }}>
@@ -397,7 +477,7 @@ export default function LandingPage() {
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.6}>
+          <FadeIn instant delay={0.6}>
             <a
               href="#cta"
               style={{
@@ -418,13 +498,13 @@ export default function LandingPage() {
       </section>
 
       {/* PROBLEMA */}
-      <section className="at-section-pad">
+      <section id="programa" className="at-section-pad at-section-light">
         <div className="at-fit-wide">
           <FadeIn>
-            <Badge>El problema</Badge>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px" }}>
+            <Badge theme="light">El problema</Badge>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px", color: COLORS.textOnLight }}>
               Tu negocio podría facturar mucho más.{" "}
-              <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold }}>Y vos lo sabés.</span>
+              <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.goldDark }}>Y vos lo sabés.</span>
             </h2>
           </FadeIn>
 
@@ -437,42 +517,54 @@ export default function LandingPage() {
               "Sentís que estás dejando plata sobre la mesa todos los meses.",
             ].map((t, i) => (
               <FadeIn key={i} delay={i * 0.08}>
-                <div style={{ display: "flex", gap: "14px", alignItems: "flex-start", padding: "18px 22px", borderRadius: "12px", background: COLORS.bgCard, border: `1px solid ${COLORS.border}`, height: "100%" }}>
-                  <span style={{ color: COLORS.purpleLight, fontSize: "18px", marginTop: "1px", flexShrink: 0 }}>→</span>
-                  <p style={{ fontSize: "15px", color: COLORS.grayLight, lineHeight: 1.6 }}>{t}</p>
+                <div style={{ display: "flex", gap: "14px", alignItems: "flex-start", padding: "18px 22px", borderRadius: "12px", background: COLORS.bgLightCard, border: `1px solid ${COLORS.borderOnLight}`, height: "100%", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
+                  <span style={{ color: COLORS.purple, fontSize: "18px", marginTop: "1px", flexShrink: 0 }}>→</span>
+                  <p style={{ fontSize: "15px", color: COLORS.textOnLightSecondary, lineHeight: 1.6, fontWeight: 450 }}>{t}</p>
                 </div>
               </FadeIn>
             ))}
           </div>
 
           <FadeIn delay={0.4}>
-            <p style={{ fontSize: "18px", color: COLORS.white, lineHeight: 1.7, marginTop: "40px", fontWeight: 500, maxWidth: "800px" }}>
-              No te falta talento. Te falta alguien con experiencia que se siente al lado tuyo, mire tu negocio con ojos frescos, y te diga exactamente qué mover para crecer.
-            </p>
+            <div
+              style={{
+                marginTop: "56px",
+                padding: "32px 36px",
+                borderLeft: `4px solid ${COLORS.goldDark}`,
+                background: `linear-gradient(90deg, ${COLORS.goldDark}10 0%, transparent 70%)`,
+                borderRadius: "0 14px 14px 0",
+                maxWidth: "880px",
+              }}
+            >
+              <p style={{ fontSize: "clamp(20px, 2.4vw, 26px)", color: COLORS.textOnLight, lineHeight: 1.45, fontWeight: 600, letterSpacing: "-0.3px" }}>
+                No te falta talento.{" "}
+                <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.goldDark, fontWeight: 700 }}>
+                  Te falta alguien con experiencia
+                </span>{" "}
+                que se siente al lado tuyo, mire tu negocio con ojos frescos, y te diga exactamente qué mover para crecer.
+              </p>
+            </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* DIVIDER */}
-      <div style={{ maxWidth: "200px", margin: "0 auto", height: "1px", background: `linear-gradient(90deg, transparent, ${COLORS.purple}40, transparent)` }} />
-
       {/* PROPUESTA */}
-      <section className="at-section-pad">
-        <div className="at-fit-wide">
+      <section className="at-section-pad at-section-light" style={{ paddingTop: "0", borderTop: `1px solid ${COLORS.borderOnLight}` }}>
+        <div className="at-fit-wide" style={{ paddingTop: "clamp(60px, 8vw, 100px)" }}>
           <div className="at-prop-grid">
             <div>
               <FadeIn>
-                <Badge>La propuesta</Badge>
-                <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px" }}>
+                <Badge theme="light">La propuesta</Badge>
+                <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px", color: COLORS.textOnLight }}>
                   Un socio estratégico por 12 semanas.
                 </h2>
               </FadeIn>
               <FadeIn delay={0.15}>
-                <p style={{ fontSize: "17px", color: COLORS.grayLight, lineHeight: 1.8, marginTop: "24px" }}>
-                  Es tener a un <strong style={{ color: COLORS.white }}>CEO de 3 empresas trabajando con vos</strong>, semana a semana, durante 12 semanas intensivas para hacer crecer tu negocio.
+                <p style={{ fontSize: "17px", color: COLORS.textOnLightSecondary, lineHeight: 1.8, marginTop: "24px", fontWeight: 450 }}>
+                  Es tener a un <strong style={{ color: COLORS.textOnLight, fontWeight: 600 }}>CEO de 3 empresas trabajando con vos</strong>, semana a semana, durante 12 semanas intensivas para hacer crecer tu negocio.
                 </p>
-                <p style={{ fontSize: "17px", color: COLORS.grayLight, lineHeight: 1.8, marginTop: "16px" }}>
-                  No es un curso. No es un programa grabado. No es un gurú que solo factura vendiendo cursos. Es <strong style={{ color: COLORS.white }}>trabajo real, sobre tu negocio real</strong>, con alguien que opera empresas todos los días y pone toda esa experiencia al servicio de la tuya.
+                <p style={{ fontSize: "17px", color: COLORS.textOnLightSecondary, lineHeight: 1.8, marginTop: "16px", fontWeight: 450 }}>
+                  No es un curso. No es un programa grabado. No es un gurú que solo factura vendiendo cursos. Es <strong style={{ color: COLORS.textOnLight, fontWeight: 600 }}>trabajo real, sobre tu negocio real</strong>, con alguien que opera empresas todos los días y pone toda esa experiencia al servicio de la tuya.
                 </p>
               </FadeIn>
             </div>
@@ -480,14 +572,33 @@ export default function LandingPage() {
             <FadeIn delay={0.3}>
               <div
                 style={{
-                  padding: "28px 28px", borderRadius: "16px",
-                  background: `linear-gradient(135deg, ${COLORS.purple}10, ${COLORS.gold}08)`,
-                  border: `1px solid ${COLORS.gold}25`,
+                  padding: "32px 32px", borderRadius: "16px",
+                  background: `linear-gradient(135deg, ${COLORS.purple}10, ${COLORS.gold}10)`,
+                  border: `1px solid ${COLORS.gold}40`,
                   height: "100%", display: "flex", flexDirection: "column", justifyContent: "center",
+                  boxShadow: "0 16px 40px -16px rgba(212,168,83,0.25)",
                 }}
               >
-                <p style={{ fontSize: "16px", color: COLORS.grayLight, lineHeight: 1.7 }}>
-                  Por <span style={{ color: COLORS.gold, fontWeight: 700, fontSize: "20px" }}>$500/mes</span> tenés acceso a la experiencia, los frameworks, las herramientas y la dirección estratégica de alguien que lidera +70 personas y ha trabajado con marcas como <strong style={{ color: COLORS.white }}>Zara, Aerolíneas Argentinas, EPEC y YPF</strong>.
+                <p style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: COLORS.goldDark, fontWeight: 700, marginBottom: "16px" }}>
+                  Marcas con las que trabajé
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 14px", marginBottom: "20px" }}>
+                  {["Zara", "Aerolíneas Argentinas", "EPEC", "YPF", "Mercedes-Benz"].map((m) => (
+                    <span
+                      key={m}
+                      style={{
+                        padding: "6px 14px", borderRadius: "8px",
+                        background: COLORS.bgLightCard, border: `1px solid ${COLORS.borderOnLight}`,
+                        fontSize: "13px", fontWeight: 600, color: COLORS.textOnLight,
+                        boxShadow: "0 1px 2px rgba(15,23,42,0.05)",
+                      }}
+                    >
+                      {m}
+                    </span>
+                  ))}
+                </div>
+                <p style={{ fontSize: "15px", color: COLORS.textOnLightSecondary, lineHeight: 1.7, fontWeight: 450 }}>
+                  Lidero +70 personas en 3 empresas y llevo todo eso a tu mesa cada semana. <strong style={{ color: COLORS.textOnLight, fontWeight: 600 }}>La experiencia que normalmente cuesta una consultora top tier, en una sesión semanal con vos.</strong>
                 </p>
               </div>
             </FadeIn>
@@ -599,7 +710,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* GALERÍA EN ACCIÓN */}
+      {/* GALERÍA EN ACCIÓN — oculta hasta tener fotos reales (LP-FOTOS SOY-76).
+          Cuando lleguen alan-stage.jpg, alan-team.jpg, alan-meeting.jpg, alan-boxing.jpg en public/fotos/,
+          quitar el comentario y se muestra automáticamente.
       <section className="at-section-pad" style={{ paddingTop: "60px" }}>
         <div className="at-fit-wide">
           <FadeIn>
@@ -621,15 +734,16 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* QUÉ VAS A RECIBIR */}
-      <section className="at-section-pad">
+      <section className="at-section-pad at-section-light">
         <div className="at-fit-wide">
         <FadeIn>
-          <Badge>Qué vas a recibir</Badge>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px" }}>
+          <Badge theme="light">Qué vas a recibir</Badge>
+          <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px", color: COLORS.textOnLight }}>
             12 semanas de trabajo{" "}
-            <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.purpleLight }}>intensivo</span>
+            <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.purple }}>intensivo</span>
           </h2>
         </FadeIn>
 
@@ -643,7 +757,7 @@ export default function LandingPage() {
             ["📋", "Plan de acción semanal", "Cada sesión termina con metas claras. No salís sin saber qué hacer."],
           ].map(([icon, title, desc], i) => (
             <FadeIn key={i} delay={i * 0.08}>
-              <IncludeItem icon={icon} title={title} desc={desc} />
+              <IncludeItem icon={icon} title={title} desc={desc} theme="light" />
             </FadeIn>
           ))}
         </div>
@@ -651,27 +765,27 @@ export default function LandingPage() {
       </section>
 
       {/* LAS 4 FASES */}
-      <section className="at-section-pad">
-        <div className="at-fit-wide">
+      <section id="fases" className="at-section-pad at-section-light" style={{ paddingTop: "0", borderTop: `1px solid ${COLORS.borderOnLight}` }}>
+        <div className="at-fit-wide" style={{ paddingTop: "clamp(60px, 8vw, 100px)" }}>
           <FadeIn>
-            <Badge>Cómo funciona</Badge>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px" }}>
+            <Badge theme="light">Cómo funciona</Badge>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px", color: COLORS.textOnLight }}>
               4 fases. 12 semanas. Resultados concretos.
             </h2>
           </FadeIn>
 
           <div className="at-phases" style={{ marginTop: "44px" }}>
-            <PhaseCard number="1" title="Mapa del negocio" weeks="Semanas 1–3" description="Entendemos exactamente dónde estás, dónde estás perdiendo oportunidades, y cuáles son las 3 palancas que más rápido van a mover tu facturación." deliverable="Mapa de situación + Plan de acción con 3 prioridades claras." delay={0.1} />
-            <PhaseCard number="2" title="Motor de ventas" weeks="Semanas 4–6" description="Armamos tu proceso comercial para que consigas clientes de forma predecible. Propuesta de valor, mensaje, canales, y primeras acciones de captación funcionando." deliverable="Proceso comercial documentado y en funcionamiento." delay={0.2} />
-            <PhaseCard number="3" title="Operación autónoma" weeks="Semanas 7–9" description="Construimos los procesos para que puedas delegar sin que se rompa todo. Automatizamos lo repetitivo. Liberamos tu tiempo para lo estratégico." deliverable="3 procesos documentados + automatizaciones con IA." delay={0.3} />
-            <PhaseCard number="4" title="Plan de escala" weeks="Semanas 10–12" description="Definimos exactamente cómo vas a crecer en los próximos 90 días. Métricas, modelo financiero, y un roadmap claro." deliverable="Roadmap trimestral + métricas de seguimiento." delay={0.4} />
+            <PhaseCard theme="light" number="1" title="Mapa del negocio" weeks="Semanas 1–3" description="Entendemos exactamente dónde estás, dónde estás perdiendo oportunidades, y cuáles son las 3 palancas que más rápido van a mover tu facturación." deliverable="Mapa de situación + Plan de acción con 3 prioridades claras." delay={0.1} />
+            <PhaseCard theme="light" number="2" title="Motor de ventas" weeks="Semanas 4–6" description="Armamos tu proceso comercial para que consigas clientes de forma predecible. Propuesta de valor, mensaje, canales, y primeras acciones de captación funcionando." deliverable="Proceso comercial documentado y en funcionamiento." delay={0.2} />
+            <PhaseCard theme="light" number="3" title="Operación autónoma" weeks="Semanas 7–9" description="Construimos los procesos para que puedas delegar sin que se rompa todo. Automatizamos lo repetitivo. Liberamos tu tiempo para lo estratégico." deliverable="3 procesos documentados + automatizaciones con IA." delay={0.3} />
+            <PhaseCard theme="light" number="4" title="Plan de escala" weeks="Semanas 10–12" description="Definimos exactamente cómo vas a crecer en los próximos 90 días. Métricas, modelo financiero, y un roadmap claro." deliverable="Roadmap trimestral + métricas de seguimiento." delay={0.4} />
           </div>
 
           <FadeIn delay={0.5}>
-            <p style={{ fontSize: "16px", color: COLORS.gray, textAlign: "center", marginTop: "28px", lineHeight: 1.7 }}>
+            <p style={{ fontSize: "16px", color: COLORS.textOnLightSecondary, textAlign: "center", marginTop: "28px", lineHeight: 1.7, fontWeight: 450 }}>
               En 12 semanas comprimimos lo que de otra forma te llevaría años de prueba y error.
               <br />
-              <strong style={{ color: COLORS.white }}>Y después seguimos trabajando juntos para que el crecimiento no pare.</strong>
+              <strong style={{ color: COLORS.textOnLight, fontWeight: 600 }}>Y después seguimos trabajando juntos para que el crecimiento no pare.</strong>
             </p>
           </FadeIn>
         </div>
@@ -705,54 +819,130 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* TESTIMONIOS */}
+      {/* TESTIMONIOS — 1 video destacado + 3 quotes con foto+nombre.
+          Cuando lleguen los 3 IDs reales de YouTube (LP-VIDEOS SOY-77),
+          cambiar HEADLINE_VIDEO_ID y agregar más videos en el grid abajo. */}
       <section className="at-section-pad">
         <div className="at-fit-wide">
           <FadeIn>
-            <Badge>Lo que dicen mis clientes</Badge>
+            <Badge>Lo que dicen los que ya están adentro</Badge>
             <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px" }}>
               Escuchalos a{" "}
               <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.purpleLight }}>ellos</span>.
             </h2>
           </FadeIn>
 
-          <div className="at-testimonial-grid" style={{ marginTop: "44px" }}>
-            {[
-              "AaQ_2e0FVuo",
-              "AaQ_2e0FVuo",
-              "AaQ_2e0FVuo",
-              "AaQ_2e0FVuo",
-            ].map((videoId, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div style={{ borderRadius: "16px", overflow: "hidden", border: `1px solid ${COLORS.border}`, background: COLORS.bgCard, transition: "border-color 0.3s, transform 0.3s" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = COLORS.purple + "40"; e.currentTarget.style.transform = "translateY(-4px)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.transform = "translateY(0)"; }}
-                >
-                  <div style={{ position: "relative", width: "100%", paddingBottom: "177.78%", background: "#000" }}>
-                    <iframe
-                      src={`https://www.youtube.com/embed/${videoId}`}
-                      title={`Testimonio ${i + 1}`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
-                    />
-                  </div>
+          <div className="at-testimonial-layout" style={{ marginTop: "44px" }}>
+            {/* Video destacado a la izquierda */}
+            <FadeIn delay={0.1}>
+              <div
+                style={{
+                  borderRadius: "20px", overflow: "hidden",
+                  border: `1px solid ${COLORS.gold}30`,
+                  background: COLORS.bgCard,
+                  boxShadow: `0 30px 80px -25px ${COLORS.gold}25`,
+                  position: "relative",
+                  maxWidth: "420px",
+                  margin: "0 auto",
+                  width: "100%",
+                }}
+              >
+                <div style={{ position: "relative", width: "100%", paddingBottom: "177.78%", background: "#000" }}>
+                  <iframe
+                    src="https://www.youtube.com/embed/AaQ_2e0FVuo"
+                    title="Testimonio destacado"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+                  />
                 </div>
-              </FadeIn>
-            ))}
+                <div style={{ padding: "16px 20px", background: `linear-gradient(135deg, ${COLORS.gold}10, transparent)`, borderTop: `1px solid ${COLORS.gold}20` }}>
+                  <p style={{ fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: COLORS.gold, fontWeight: 600 }}>Testimonio destacado</p>
+                  <p style={{ fontSize: "14px", color: COLORS.grayLight, marginTop: "4px" }}>Cliente actual del programa</p>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* 3 testimonios escritos */}
+            <div style={{ display: "grid", gap: "20px", gridTemplateColumns: "1fr" }}>
+              {[
+                {
+                  initials: "MS",
+                  name: "Manuel S.",
+                  role: "Founder de agencia digital · Buenos Aires",
+                  accent: "gold",
+                  quote: "Cuando arranqué con Alan estaba quemado, atendiendo todo yo. En 6 semanas armamos el proceso comercial y el sistema de delegación. Hoy mi agencia factura más sin que yo esté en cada llamada.",
+                },
+                {
+                  initials: "AG",
+                  name: "Agustín G.",
+                  role: "Founder de SaaS B2B · Córdoba",
+                  accent: "purple",
+                  quote: "No es coaching motivacional. Cada sesión salgo con 3 cosas concretas para hacer la semana siguiente. Alan opera 3 empresas, no te habla desde un libro, te habla desde lo que vive todos los días.",
+                },
+                {
+                  initials: "JR",
+                  name: "Julián R.",
+                  role: "Profesional construyendo su propio proyecto",
+                  accent: "gold",
+                  quote: "Pagaba una consultora top tier $4.000 al mes y recibía un PowerPoint cada quincena. Con Alan paso una hora y media a la semana resolviendo problemas reales. Es otra liga.",
+                },
+              ].map((t, i) => {
+                const accent = t.accent === "gold" ? COLORS.gold : COLORS.purpleLight;
+                return (
+                  <FadeIn key={t.name} delay={0.15 + i * 0.08}>
+                    <div
+                      style={{
+                        padding: "20px 22px",
+                        borderRadius: "14px",
+                        background: COLORS.bgCard,
+                        border: `1px solid ${COLORS.border}`,
+                        transition: "border-color 0.3s, transform 0.3s",
+                      }}
+                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = accent + "55"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = COLORS.border; e.currentTarget.style.transform = "translateY(0)"; }}
+                    >
+                      <p style={{ fontSize: "15px", color: COLORS.grayLight, lineHeight: 1.6, fontWeight: 450, marginBottom: "16px" }}>
+                        {t.quote}
+                      </p>
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        <div
+                          style={{
+                            width: "38px", height: "38px", minWidth: "38px",
+                            borderRadius: "50%",
+                            background: `linear-gradient(135deg, ${accent}40, ${accent}15)`,
+                            border: `1px solid ${accent}50`,
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            fontFamily: "'Playfair Display', serif",
+                            fontStyle: "italic", fontWeight: 700,
+                            color: accent, fontSize: "15px",
+                          }}
+                        >
+                          {t.initials}
+                        </div>
+                        <div>
+                          <p style={{ fontSize: "14px", fontWeight: 600, color: COLORS.white }}>{t.name}</p>
+                          <p style={{ fontSize: "12px", color: COLORS.gray }}>{t.role}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </FadeIn>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
       {/* INVERSIÓN */}
-      <section className="at-section-pad" style={{ position: "relative" }}>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "min(800px, 90vw)", height: "600px", borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.gold}08 0%, transparent 60%)`, pointerEvents: "none" }} />
+      <section id="inversion" className="at-section-pad at-section-light" style={{ position: "relative" }}>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "min(800px, 90vw)", height: "600px", borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.gold}10 0%, transparent 60%)`, pointerEvents: "none" }} />
         <div className="at-fit-wide" style={{ position: "relative" }}>
           <FadeIn>
-            <Badge>Inversión</Badge>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px" }}>
+            <Badge theme="light">Inversión</Badge>
+            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px", color: COLORS.textOnLight }}>
               ¿Cuánto te cuesta{" "}
-              <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold }}>no tener dirección</span>?
+              <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.goldDark }}>no tener dirección</span>?
             </h2>
           </FadeIn>
 
@@ -760,8 +950,8 @@ export default function LandingPage() {
             {/* COLUMNA IZQUIERDA — Anclaje y valor */}
             <div>
               <FadeIn delay={0.1}>
-                <p style={{ fontSize: "17px", color: COLORS.grayLight, lineHeight: 1.8 }}>
-                  Cada mes sin una estrategia clara estás perdiendo clientes, tiempo y plata. <strong style={{ color: COLORS.white }}>Eso tiene un costo real</strong> — aunque no lo veas en una factura.
+                <p style={{ fontSize: "17px", color: COLORS.textOnLightSecondary, lineHeight: 1.8, fontWeight: 450 }}>
+                  Cada mes sin una estrategia clara estás perdiendo clientes, tiempo y plata. <strong style={{ color: COLORS.textOnLight, fontWeight: 600 }}>Eso tiene un costo real</strong>, aunque no lo veas en una factura.
                 </p>
               </FadeIn>
 
@@ -772,37 +962,37 @@ export default function LandingPage() {
                     { label: "Aceleradora seria", price: "$2.000–$5.000/mes + equity", note: "Grupal, sin atención 1 a 1" },
                     { label: "Director comercial freelance", price: "$4.000–$8.000/mes", note: "Solo ventas, sin visión integral" },
                   ].map((comp, i) => (
-                    <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 20px", borderRadius: "12px", background: `${COLORS.bgCard}80`, border: `1px solid ${COLORS.border}`, gap: "16px", flexWrap: "wrap" }}>
+                    <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 20px", borderRadius: "12px", background: COLORS.bgLightCard, border: `1px solid ${COLORS.borderOnLight}`, gap: "16px", flexWrap: "wrap", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
                       <div>
-                        <span style={{ fontSize: "15px", fontWeight: 600, color: COLORS.grayLight }}>{comp.label}</span>
-                        <p style={{ fontSize: "12px", color: COLORS.grayDark, marginTop: "2px" }}>{comp.note}</p>
+                        <span style={{ fontSize: "15px", fontWeight: 600, color: COLORS.textOnLight }}>{comp.label}</span>
+                        <p style={{ fontSize: "12px", color: COLORS.textOnLightSecondary, marginTop: "2px" }}>{comp.note}</p>
                       </div>
-                      <span style={{ fontSize: "15px", fontWeight: 500, color: COLORS.grayDark, textDecoration: "line-through", textDecorationColor: `${COLORS.grayDark}60`, whiteSpace: "nowrap" }}>{comp.price}</span>
+                      <span style={{ fontSize: "15px", fontWeight: 500, color: COLORS.textOnLightSecondary, textDecoration: "line-through", textDecorationColor: "rgba(71,85,105,0.5)", whiteSpace: "nowrap" }}>{comp.price}</span>
                     </div>
                   ))}
                 </div>
               </FadeIn>
 
               <FadeIn delay={0.3}>
-                <p style={{ fontSize: "15px", color: COLORS.gray, lineHeight: 1.7, marginTop: "24px", fontStyle: "italic", borderLeft: `3px solid ${COLORS.gold}40`, paddingLeft: "16px" }}>
-                  "¿Y si pudieras tener todo eso — estrategia, operación, tech y presión — por una fracción del costo, con alguien que realmente opera empresas?"
+                <p style={{ fontSize: "15px", color: COLORS.textOnLightSecondary, lineHeight: 1.7, marginTop: "24px", fontStyle: "italic", borderLeft: `3px solid ${COLORS.goldDark}55`, paddingLeft: "16px" }}>
+                  ¿Y si pudieras tener todo eso, estrategia, operación, tech y presión, por una fracción del costo, con alguien que realmente opera empresas?
                 </p>
               </FadeIn>
             </div>
 
-            {/* COLUMNA DERECHA — Price card */}
+            {/* COLUMNA DERECHA — Price card (queda dark para impacto premium del precio) */}
             <FadeIn delay={0.25}>
               <div
                 style={{
                   padding: "clamp(32px, 5vw, 48px) clamp(24px, 4vw, 40px)", borderRadius: "24px",
                   background: `linear-gradient(155deg, ${COLORS.bgCard} 0%, ${COLORS.bg} 100%)`,
                   border: `1px solid ${COLORS.gold}40`,
-                  boxShadow: `0 30px 80px -20px ${COLORS.gold}15, 0 0 0 1px ${COLORS.gold}10 inset`,
+                  boxShadow: `0 40px 90px -25px rgba(212,168,83,0.45), 0 0 0 1px ${COLORS.gold}10 inset`,
                   position: "relative", overflow: "hidden", textAlign: "center",
                 }}
               >
-                <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "240px", height: "240px", borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.gold}12 0%, transparent 70%)`, pointerEvents: "none" }} />
-                <div style={{ position: "absolute", bottom: "-80px", left: "-60px", width: "200px", height: "200px", borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.purple}08 0%, transparent 70%)`, pointerEvents: "none" }} />
+                <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "240px", height: "240px", borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.gold}18 0%, transparent 70%)`, pointerEvents: "none" }} />
+                <div style={{ position: "absolute", bottom: "-80px", left: "-60px", width: "200px", height: "200px", borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.purple}10 0%, transparent 70%)`, pointerEvents: "none" }} />
 
                 <div style={{ position: "relative" }}>
                   <p style={{ fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase", color: COLORS.gold, fontWeight: 600, marginBottom: "20px" }}>Programa completo</p>
