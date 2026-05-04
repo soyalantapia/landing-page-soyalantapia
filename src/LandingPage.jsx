@@ -487,8 +487,8 @@ export default function LandingPage() {
         <div className="at-nav-links" style={{ alignItems: "center", gap: "20px" }}>
           {[
             ["Programa", "#el-programa"],
-            ["Método", "#fases"],
             ["Historia", "#historia"],
+            ["Método", "#fases"],
             ["Testimonios", "#testimonios"],
             ["Inversión", "#inversion"],
             ["FAQ", "#faq"],
@@ -1024,27 +1024,64 @@ export default function LandingPage() {
                 {
                   year: "2014",
                   name: "ZutaEstudio",
+                  initial: "Z",
+                  accentColor: COLORS.gold,
                   tagline: "Primera agencia de community managers de LATAM. Hoy, estructura comercial B2B para startups tech, especialmente en España.",
                   clients: ["Zara", "TodoModa", "Quevana", "Aerolíneas Argentinas"],
                 },
                 {
                   year: "2016",
                   name: "Xnod",
+                  initial: "X",
+                  accentColor: COLORS.purpleLight,
                   tagline: "La empresa de IA de los bancos, mineras y fintech de LATAM. Software factory que construye soluciones de inteligencia artificial para operaciones críticas.",
                   clients: ["Mercedes-Benz", "Banco de Panamá", "Isuzu", "EPEC", "YPF"],
                 },
                 {
                   year: "2020",
                   name: "Deenex",
+                  initial: "D",
+                  accentColor: COLORS.goldLight,
                   tagline: "Convertimos clientes anónimos en recurrentes para marcas multisucursal. App + fidelidad + IA. +250 locales gastronómicos activos en LATAM.",
                   clients: ["+250 locales activos", "App + Fidelidad + IA", "deenex.tech"],
                 },
               ].map((biz, i) => (
                 <FadeIn key={biz.name} delay={i * 0.1}>
                   <div className="at-biz-card" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "12px", marginBottom: "12px" }}>
-                      <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "20px", color: COLORS.gold, fontWeight: 700 }}>{biz.year}</span>
-                      <span style={{ fontSize: "22px", fontWeight: 700, color: COLORS.white, letterSpacing: "-0.3px" }}>{biz.name}</span>
+                    {/* LOGO MONOGRAMA */}
+                    <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "20px" }}>
+                      <div style={{
+                        width: "52px",
+                        height: "52px",
+                        minWidth: "52px",
+                        borderRadius: "14px",
+                        background: `linear-gradient(135deg, ${biz.accentColor}25, ${biz.accentColor}08)`,
+                        border: `1px solid ${biz.accentColor}55`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        boxShadow: `0 8px 24px -8px ${biz.accentColor}40`,
+                      }}>
+                        <span style={{
+                          fontFamily: "'Playfair Display', serif",
+                          fontStyle: "italic",
+                          fontSize: "28px",
+                          fontWeight: 700,
+                          color: biz.accentColor,
+                          lineHeight: 1,
+                          letterSpacing: "-1px",
+                        }}>
+                          {biz.initial}
+                        </span>
+                      </div>
+                      <div>
+                        <div style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", fontSize: "13px", color: COLORS.gold, fontWeight: 700, lineHeight: 1, marginBottom: "4px" }}>
+                          desde {biz.year}
+                        </div>
+                        <div style={{ fontSize: "20px", fontWeight: 700, color: COLORS.white, letterSpacing: "-0.3px", lineHeight: 1.1 }}>
+                          {biz.name}
+                        </div>
+                      </div>
                     </div>
                     <p style={{ fontSize: "14px", color: COLORS.grayLight, lineHeight: 1.6, flex: 1 }}>{biz.tagline}</p>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "16px" }}>
