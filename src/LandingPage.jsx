@@ -395,6 +395,8 @@ export default function LandingPage() {
         .at-quote-grid { grid-template-columns: 1fr !important; }
         @media (min-width: 720px) { .at-quote-grid { grid-template-columns: 1fr 1fr !important; } }
         @media (min-width: 1100px) { .at-quote-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+        .at-time-compare { grid-template-columns: 1fr !important; gap: 24px !important; }
+        @media (min-width: 640px) { .at-time-compare { grid-template-columns: 1fr auto 1fr !important; } }
         .at-objectives-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
         @media (min-width: 720px) { .at-objectives-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
         .at-empresas-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
@@ -1357,11 +1359,10 @@ export default function LandingPage() {
                 color: COLORS.textOnLight,
                 marginBottom: "0",
               }}>
-                Un protocolo probado.{" "}
+                Un método{" "}
                 <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold, fontWeight: 700 }}>
-                  12 semanas
-                </span>{" "}
-                para empujar tu negocio.
+                  a tu medida
+                </span>. 12 semanas intensas. Y un acompañamiento que no termina ahí.
               </h2>
               <p style={{
                 fontSize: "clamp(17px, 1.8vw, 20px)",
@@ -1369,11 +1370,11 @@ export default function LandingPage() {
                 lineHeight: 1.6,
                 marginTop: "26px",
                 fontWeight: 450,
-                maxWidth: "720px",
+                maxWidth: "780px",
                 marginLeft: "auto",
                 marginRight: "auto",
               }}>
-                4 fases. Cada una con un objetivo concreto, sesiones 1 a 1, y un entregable que te llevás. Lo que en otros programas tarda años, acá pasa en 3 meses.
+                Las 12 semanas son foco e intensidad ajustadas a tu punto de partida. Mi objetivo es que veas resultados antes de la semana 12. Y después seguimos trabajando juntos mes a mes, sin soltarte.
               </p>
             </div>
           </FadeIn>
@@ -1389,18 +1390,19 @@ export default function LandingPage() {
               flexWrap: "wrap",
             }}>
               {[
-                ["01", "S1 a 3"],
-                ["02", "S4 a 6"],
-                ["03", "S7 a 9"],
-                ["04", "S10 a 12"],
+                ["01", "Diagnóstico"],
+                ["02", "Foco"],
+                ["03", "Estructura"],
+                ["04", "Visión"],
+                ["∞", "Mes a mes"],
               ].map(([n, w], i) => (
                 <span key={n} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <span style={{
                     fontSize: "12px",
                     fontWeight: 700,
-                    color: COLORS.textOnLight,
-                    background: COLORS.bgLightCard,
-                    border: `1px solid ${COLORS.borderOnLight}`,
+                    color: i === 4 ? COLORS.goldDark : COLORS.textOnLight,
+                    background: i === 4 ? `linear-gradient(135deg, ${COLORS.gold}10, ${COLORS.bgLightCard})` : COLORS.bgLightCard,
+                    border: `1px solid ${i === 4 ? COLORS.gold + "40" : COLORS.borderOnLight}`,
                     padding: "8px 14px",
                     borderRadius: "999px",
                     boxShadow: "0 1px 2px rgba(15,23,42,0.04)",
@@ -1409,7 +1411,7 @@ export default function LandingPage() {
                     <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold, marginRight: "6px" }}>{n}</span>
                     {w}
                   </span>
-                  {i < 3 ? (
+                  {i < 4 ? (
                     <span style={{ width: "16px", height: "1px", background: COLORS.purple, opacity: 0.35 }} />
                   ) : null}
                 </span>
@@ -1419,78 +1421,282 @@ export default function LandingPage() {
 
           {/* PHASE CARDS */}
           <div className="at-phases" style={{ marginTop: "60px" }}>
-            <PhaseCard theme="light" number="01" title="Mapa del negocio" weeks="Semanas 1 a 3" objective="Diagnóstico real, sin diplomacia." description="Entendemos exactamente dónde estás, dónde estás perdiendo oportunidades, y cuáles son las 3 palancas que más rápido van a mover tu facturación." deliverable="Mapa de situación + Plan de acción con 3 prioridades claras." delay={0.1} />
-            <PhaseCard theme="light" number="02" title="Motor de ventas" weeks="Semanas 4 a 6" objective="Clientes de forma predecible." description="Armamos tu proceso comercial. Propuesta de valor, mensaje, canales, y primeras acciones de captación funcionando antes de la sesión 6." deliverable="Proceso comercial documentado y en funcionamiento." delay={0.2} />
-            <PhaseCard theme="light" number="03" title="Operación autónoma" weeks="Semanas 7 a 9" objective="Que el negocio no dependa de vos." description="Construimos los procesos para que puedas delegar sin que se rompa todo. Automatizamos lo repetitivo con IA. Liberamos tu tiempo para lo estratégico." deliverable="3 procesos documentados + automatizaciones con IA." delay={0.3} />
-            <PhaseCard theme="light" number="04" title="Plan de escala" weeks="Semanas 10 a 12" objective="Roadmap claro a 90 días." description="Definimos exactamente cómo vas a crecer en los próximos 90 días. Métricas, modelo financiero, prioridades trimestrales y un roadmap accionable." deliverable="Roadmap trimestral + métricas de seguimiento." delay={0.4} />
+            <PhaseCard theme="light" number="01" title="Diagnóstico real" weeks="Primeras semanas" objective="Entender dónde estás parado." description="Antes de tocar nada, mapeo tu situación real. Qué funciona, qué no, qué te frena. El plan que armamos se ajusta a tu punto de partida, no a un esquema rígido." deliverable="Mapa de situación + Plan a medida con tus 3 prioridades." delay={0.1} />
+            <PhaseCard theme="light" number="02" title="Foco en el cuello de botella" weeks="A medida" objective="Atacamos lo que más te frena hoy." description="Si lo que más te traba son las ventas, armamos el motor comercial. Si es la operación, ahí ponemos el peso. Adaptamos la fase a tu realidad para que veas resultados antes." deliverable="Sistema funcionando sobre tu cuello de botella principal." delay={0.2} />
+            <PhaseCard theme="light" number="03" title="Estructura para escalar" weeks="A medida" objective="Que el negocio no dependa solo de vos." description="Construimos los procesos para que puedas delegar sin que se rompa todo. Automatizaciones con IA, sistemas de delegación, herramientas para liberar tu cabeza." deliverable="Procesos documentados + automatizaciones con IA." delay={0.3} />
+            <PhaseCard theme="light" number="04" title="Visión a 90 días" weeks="Cierre intensivo" objective="Roadmap claro y accionable." description="Definimos cómo vas a crecer en los próximos 90 días. Métricas, modelo financiero, prioridades trimestrales y un plan de juego que podés ejecutar." deliverable="Roadmap trimestral + métricas de seguimiento." delay={0.4} />
           </div>
 
-          {/* STATS STRIP */}
+          {/* 5TO BLOQUE - ACOMPAÑAMIENTO CONTINUO (full width, gold accent) */}
           <FadeIn delay={0.5}>
             <div style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-              gap: "24px",
-              marginTop: "72px",
-              padding: "36px 28px",
-              borderTop: `1px solid ${COLORS.borderOnLight}`,
-              borderBottom: `1px solid ${COLORS.borderOnLight}`,
+              marginTop: "32px",
+              padding: "clamp(32px, 4vw, 48px)",
+              borderRadius: "20px",
+              background: `linear-gradient(135deg, ${COLORS.bgLightCard}, ${COLORS.gold}0A)`,
+              border: `1px solid ${COLORS.gold}55`,
+              position: "relative",
+              overflow: "hidden",
+              boxShadow: "0 24px 60px -28px rgba(212,168,83,0.30)",
             }}>
-              {[
-                ["4", "Fases"],
-                ["12", "Semanas"],
-                ["12", "Sesiones 1 a 1"],
-                ["~10", "Entregables"],
-              ].map(([n, label]) => (
-                <div key={label} style={{ textAlign: "center" }}>
-                  <div style={{
-                    fontFamily: "'Playfair Display', serif",
-                    fontStyle: "italic",
-                    fontSize: "clamp(40px, 5vw, 56px)",
-                    fontWeight: 700,
-                    color: COLORS.gold,
-                    lineHeight: 1,
-                    letterSpacing: "-1px",
-                  }}>
-                    {n}
+              {/* Watermark infinity */}
+              <div aria-hidden style={{
+                position: "absolute",
+                top: "-40px",
+                right: "-20px",
+                fontFamily: "'Playfair Display', serif",
+                fontStyle: "italic",
+                fontSize: "240px",
+                lineHeight: 1,
+                fontWeight: 700,
+                color: COLORS.gold,
+                opacity: 0.10,
+                pointerEvents: "none",
+                letterSpacing: "-10px",
+              }}>
+                ∞
+              </div>
+
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "1fr",
+                gap: "20px",
+                alignItems: "center",
+                position: "relative",
+              }} className="at-ongoing-grid">
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px", flexWrap: "wrap" }}>
+                    <span style={{
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      letterSpacing: "2px",
+                      textTransform: "uppercase",
+                      color: COLORS.goldDark,
+                      padding: "6px 12px",
+                      borderRadius: "999px",
+                      background: COLORS.gold + "15",
+                      border: `1px solid ${COLORS.gold}40`,
+                    }}>
+                      Después de la semana 12
+                    </span>
+                    <span style={{ fontSize: "12px", color: COLORS.textOnLightSecondary, fontWeight: 500, letterSpacing: "0.3px" }}>
+                      Mes a mes, sin compromiso anticipado
+                    </span>
                   </div>
-                  <div style={{
-                    fontSize: "11px",
+
+                  <h3 style={{
+                    fontSize: "clamp(24px, 3vw, 34px)",
                     fontWeight: 700,
-                    letterSpacing: "2px",
-                    textTransform: "uppercase",
+                    color: COLORS.textOnLight,
+                    marginBottom: "12px",
+                    lineHeight: 1.15,
+                    letterSpacing: "-0.5px",
+                  }}>
+                    Acompañamiento continuo.{" "}
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold, fontWeight: 700 }}>
+                      No te suelto.
+                    </span>
+                  </h3>
+
+                  <p style={{
+                    fontSize: "16px",
                     color: COLORS.textOnLightSecondary,
-                    marginTop: "10px",
+                    lineHeight: 1.65,
+                    fontWeight: 450,
+                    maxWidth: "780px",
                   }}>
-                    {label}
-                  </div>
+                    Las 12 semanas son la intensidad inicial. Después seguimos trabajando juntos mes a mes durante todo el año si vos querés. Tu negocio cambia, los desafíos cambian, y yo sigo del otro lado del WhatsApp y de la sesión semanal. Sin contrato anual, sin atarte. Mientras te aporte, seguimos.
+                  </p>
                 </div>
-              ))}
+              </div>
             </div>
           </FadeIn>
 
-          {/* CLOSING STATEMENT */}
-          <FadeIn delay={0.6}>
-            <div style={{ textAlign: "center", marginTop: "56px", maxWidth: "780px", marginLeft: "auto", marginRight: "auto" }}>
+          {/* CLOSING STATEMENT - TIME COMPRESSION DRAMATICO */}
+          <FadeIn delay={0.5}>
+            <div style={{
+              marginTop: "96px",
+              padding: "clamp(48px, 6vw, 72px) clamp(28px, 5vw, 56px)",
+              borderRadius: "24px",
+              background: `linear-gradient(135deg, ${COLORS.bgLightCard}, ${COLORS.gold}08)`,
+              border: `1px solid ${COLORS.gold}40`,
+              boxShadow: "0 30px 70px -30px rgba(212,168,83,0.30)",
+              position: "relative",
+              overflow: "hidden",
+              textAlign: "center",
+            }}>
+              {/* Decorative glow */}
+              <div aria-hidden style={{
+                position: "absolute", top: "-100px", right: "-100px",
+                width: "360px", height: "360px",
+                background: `radial-gradient(circle, ${COLORS.gold}1A 0%, transparent 70%)`,
+                pointerEvents: "none",
+              }} />
+
+              {/* OVERLINE */}
+              <div style={{
+                fontSize: "12px",
+                letterSpacing: "4px",
+                textTransform: "uppercase",
+                color: COLORS.goldDark,
+                fontWeight: 700,
+                marginBottom: "28px",
+                position: "relative",
+              }}>
+                La verdad sobre el tiempo
+              </div>
+
+              {/* MASSIVE STATEMENT */}
+              <h3 style={{
+                fontSize: "clamp(28px, 4.6vw, 56px)",
+                fontWeight: 700,
+                lineHeight: 1.1,
+                letterSpacing: "-1.5px",
+                color: COLORS.textOnLight,
+                maxWidth: "880px",
+                margin: "0 auto",
+                position: "relative",
+              }}>
+                Lo que normalmente lleva{" "}
+                <span style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontStyle: "italic",
+                  color: COLORS.textOnLightSecondary,
+                  fontWeight: 700,
+                  position: "relative",
+                  display: "inline-block",
+                }}>
+                  años
+                  <span aria-hidden style={{
+                    position: "absolute", left: "-4%", right: "-4%", top: "52%",
+                    height: "3px", background: COLORS.goldDark, opacity: 0.6,
+                    transform: "rotate(-2deg)",
+                  }} />
+                </span>
+                {" "}de prueba y error,{" "}
+                <span style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontStyle: "italic",
+                  background: `linear-gradient(135deg, ${COLORS.gold}, ${COLORS.goldLight})`,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  fontWeight: 700,
+                }}>
+                  acá pasa en 12 semanas
+                </span>.
+              </h3>
+
+              {/* TIME COMPARISON VISUAL */}
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "1fr auto 1fr",
+                alignItems: "center",
+                gap: "clamp(16px, 3vw, 32px)",
+                marginTop: "48px",
+                maxWidth: "760px",
+                marginLeft: "auto",
+                marginRight: "auto",
+                position: "relative",
+              }} className="at-time-compare">
+                {/* Sin Alan */}
+                <div style={{ textAlign: "center", opacity: 0.55 }}>
+                  <div style={{
+                    fontSize: "10px",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    color: COLORS.textOnLightSecondary,
+                    fontWeight: 700,
+                    marginBottom: "12px",
+                  }}>
+                    Solo, por tu cuenta
+                  </div>
+                  <div style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontStyle: "italic",
+                    fontSize: "clamp(36px, 6vw, 64px)",
+                    fontWeight: 700,
+                    color: COLORS.textOnLightSecondary,
+                    lineHeight: 1,
+                    letterSpacing: "-2px",
+                  }}>
+                    3 a 5 años
+                  </div>
+                  <div style={{
+                    fontSize: "12px",
+                    color: COLORS.textOnLightSecondary,
+                    marginTop: "10px",
+                    lineHeight: 1.5,
+                  }}>
+                    de prueba y error caro
+                  </div>
+                </div>
+
+                {/* Arrow / connector */}
+                <div aria-hidden style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontStyle: "italic",
+                  fontSize: "clamp(28px, 4vw, 44px)",
+                  color: COLORS.gold,
+                  fontWeight: 700,
+                  letterSpacing: "1px",
+                }}>
+                  vs.
+                </div>
+
+                {/* Con Alan */}
+                <div style={{ textAlign: "center" }}>
+                  <div style={{
+                    fontSize: "10px",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    color: COLORS.goldDark,
+                    fontWeight: 700,
+                    marginBottom: "12px",
+                  }}>
+                    Con un CEO al lado
+                  </div>
+                  <div style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontStyle: "italic",
+                    fontSize: "clamp(36px, 6vw, 64px)",
+                    fontWeight: 700,
+                    background: `linear-gradient(135deg, ${COLORS.gold}, ${COLORS.goldLight})`,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    lineHeight: 1,
+                    letterSpacing: "-2px",
+                  }}>
+                    12 semanas
+                  </div>
+                  <div style={{
+                    fontSize: "12px",
+                    color: COLORS.textOnLight,
+                    marginTop: "10px",
+                    lineHeight: 1.5,
+                    fontWeight: 600,
+                  }}>
+                    de trabajo focal
+                  </div>
+                </div>
+              </div>
+
+              {/* CIERRE FRASE */}
               <p style={{
                 fontFamily: "'Playfair Display', serif",
                 fontStyle: "italic",
-                fontSize: "clamp(22px, 2.6vw, 32px)",
+                fontSize: "clamp(18px, 2vw, 24px)",
                 color: COLORS.textOnLight,
-                lineHeight: 1.4,
+                lineHeight: 1.5,
                 fontWeight: 700,
-                letterSpacing: "-0.3px",
+                marginTop: "48px",
+                letterSpacing: "-0.2px",
+                position: "relative",
               }}>
-                En 12 semanas comprimimos lo que de otra forma te llevaría años de prueba y error.
-              </p>
-              <p style={{
-                fontSize: "16px",
-                color: COLORS.textOnLightSecondary,
-                marginTop: "16px",
-                lineHeight: 1.6,
-                fontWeight: 500,
-              }}>
-                Y después seguimos trabajando juntos para que el crecimiento no pare.
+                Y después seguimos trabajando juntos.
+                <br />
+                <span style={{ color: COLORS.goldDark }}>
+                  Porque el crecimiento no se detiene en la semana 12.
+                </span>
               </p>
             </div>
           </FadeIn>
