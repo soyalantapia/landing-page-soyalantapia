@@ -356,11 +356,12 @@ export default function LandingPage() {
         .at-fit-grid { display: grid; gap: 24px; grid-template-columns: 1fr; }
         @media (min-width: 640px) { .at-fit-grid { grid-template-columns: 1fr 1fr; } }
         .at-2col { display: grid; gap: 24px; grid-template-columns: 1fr; }
-        @media (min-width: 900px) { .at-2col { grid-template-columns: 1fr 1fr; gap: 32px; } }
+        @media (min-width: 720px) { .at-2col { grid-template-columns: 1fr 1fr; gap: 28px; } }
         .at-section-pad { padding: 80px 24px; }
         @media (min-width: 1024px) { .at-section-pad { padding: 120px 48px; } }
         .at-bio-grid { display: grid; gap: 40px; grid-template-columns: 1fr; align-items: start; }
-        @media (min-width: 900px) { .at-bio-grid { grid-template-columns: 320px 1fr; gap: 56px; } }
+        .at-bio-grid > *:first-child { max-width: 440px; margin: 0 auto; width: 100%; }
+        @media (min-width: 900px) { .at-bio-grid { grid-template-columns: 320px 1fr; gap: 56px; } .at-bio-grid > *:first-child { max-width: none; margin: 0; } }
         .at-portrait {
           position: relative; width: 100%; aspect-ratio: 3/4;
           border-radius: 20px; overflow: hidden;
@@ -400,6 +401,7 @@ export default function LandingPage() {
         .at-objectives-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
         @media (min-width: 720px) { .at-objectives-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
         .at-empresas-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+        @media (min-width: 720px) { .at-empresas-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; } }
         @media (min-width: 900px) { .at-empresas-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } }
         details summary::-webkit-details-marker { display: none; }
         details[open] .at-faq-chevron { transform: rotate(45deg); background: ${COLORS.purple}30 !important; }
