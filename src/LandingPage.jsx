@@ -1144,9 +1144,9 @@ export default function LandingPage() {
           {/* Grid 4 videos */}
           <div className="at-testimonial-grid" style={{ marginTop: "44px" }}>
             {[
-              { videoId: "4dGqAfCFcWg", label: "Testimonio en video", role: "Cliente del programa" },
-              { videoId: "R53Cc4xKjYQ", label: "Testimonio en video", role: "Cliente del programa" },
-              { videoId: "h3bV8iS6gMQ", label: "Testimonio en video", role: "Cliente del programa" },
+              { videoId: "4dGqAfCFcWg", label: "Manuel S.", role: "Founder de agencia digital" },
+              { videoId: "R53Cc4xKjYQ", label: "Agustín G.", role: "Founder de SaaS B2B" },
+              { videoId: "h3bV8iS6gMQ", label: "Julián R.", role: "Profesional construyendo" },
             ].map((v, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 <div
