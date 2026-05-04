@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#D4A853"/>
+      <stop offset="1" stop-color="#E8C97A"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0A0A0F"/>
+  <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="#8B5CF6" stroke-opacity="0.35" stroke-width="1"/>
+  <text x="32" y="42" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-style="italic" font-weight="700" font-size="32" fill="url(#g)">AT</text>
+</svg>
