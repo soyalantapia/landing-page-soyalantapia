@@ -422,7 +422,7 @@ export default function LandingPage() {
         .at-hero-pad-bottom { padding-bottom: 80px; }
         @media (max-width: 767px) { .at-hero-pad-bottom { padding-bottom: 100px; } }
         .at-nav-links { display: none !important; }
-        @media (min-width: 720px) { .at-nav-links { display: flex !important; } }
+        @media (min-width: 1024px) { .at-nav-links { display: flex !important; } }
         .at-section-light {
           background: ${COLORS.bgLight};
           color: ${COLORS.textOnLight};
@@ -445,7 +445,7 @@ export default function LandingPage() {
           boxShadow: scrolled ? "0 8px 32px rgba(0,0,0,0.45)" : "0 4px 20px rgba(0,0,0,0.25)",
           display: "flex", alignItems: "center", justifyContent: "space-between",
           gap: "20px",
-          width: "min(820px, 94vw)", transition: "all 0.4s ease",
+          width: "min(980px, 94vw)", transition: "all 0.4s ease",
         }}
       >
         <a
@@ -482,11 +482,14 @@ export default function LandingPage() {
           </span>
         </a>
 
-        <div className="at-nav-links" style={{ alignItems: "center", gap: "22px" }}>
+        <div className="at-nav-links" style={{ alignItems: "center", gap: "20px" }}>
           {[
-            ["El programa", "#el-programa"],
-            ["Fases", "#fases"],
+            ["Programa", "#el-programa"],
+            ["Método", "#fases"],
+            ["Historia", "#historia"],
+            ["Testimonios", "#testimonios"],
             ["Inversión", "#inversion"],
+            ["FAQ", "#faq"],
           ].map(([label, href]) => (
             <a
               key={href}
@@ -946,7 +949,7 @@ export default function LandingPage() {
       </section>
 
       {/* QUIÉN SOY */}
-      <section className="at-section-pad" style={{ background: `linear-gradient(180deg, ${COLORS.bgCard}80 0%, ${COLORS.bg} 100%)` }}>
+      <section id="historia" className="at-section-pad" style={{ background: `linear-gradient(180deg, ${COLORS.bgCard}80 0%, ${COLORS.bg} 100%)` }}>
         <div className="at-fit-wide">
           <FadeIn>
             <Badge>Mi historia</Badge>
@@ -1749,7 +1752,7 @@ export default function LandingPage() {
 
       {/* TESTIMONIOS — 4 videos en grid + 3 quotes escritos abajo.
           Reemplazar los 4 video IDs cuando lleguen los reales (LP-VIDEOS SOY-77). */}
-      <section className="at-section-pad">
+      <section id="testimonios" className="at-section-pad">
         <div className="at-fit-wide">
           <FadeIn>
             <Badge>Lo que dicen los que ya están adentro</Badge>
@@ -2115,7 +2118,7 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ — resolución de dudas antes del CTA Final */}
-      <section className="at-section-pad" style={{ paddingBottom: "0" }}>
+      <section id="faq" className="at-section-pad" style={{ paddingBottom: "0" }}>
         <div className="at-fit" style={{ maxWidth: "820px", margin: "0 auto" }}>
           <FadeIn>
             <div style={{ textAlign: "center", marginBottom: "12px" }}>
