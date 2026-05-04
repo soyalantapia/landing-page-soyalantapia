@@ -714,60 +714,264 @@ export default function LandingPage() {
       </section>
 
       {/* PROPUESTA */}
-      <section id="el-programa" className="at-section-pad at-section-light" style={{ paddingTop: "0", borderTop: `1px solid ${COLORS.borderOnLight}` }}>
-        <div className="at-fit-wide" style={{ paddingTop: "clamp(60px, 8vw, 100px)" }}>
-          <div className="at-prop-grid">
-            <div>
-              <FadeIn>
-                <Badge theme="light">La propuesta</Badge>
-                <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px", color: COLORS.textOnLight }}>
-                  Un socio estratégico por 12 semanas.
-                </h2>
-              </FadeIn>
-              <FadeIn delay={0.15}>
-                <p style={{ fontSize: "17px", color: COLORS.textOnLightSecondary, lineHeight: 1.8, marginTop: "24px", fontWeight: 450 }}>
-                  Es tener a un <strong style={{ color: COLORS.textOnLight, fontWeight: 600 }}>CEO de 3 empresas trabajando con vos</strong>, semana a semana, durante 12 semanas intensivas para hacer crecer tu negocio.
-                </p>
-                <p style={{ fontSize: "17px", color: COLORS.textOnLightSecondary, lineHeight: 1.8, marginTop: "16px", fontWeight: 450 }}>
-                  No es un curso. No es un programa grabado. No es un gurú que solo factura vendiendo cursos. Es <strong style={{ color: COLORS.textOnLight, fontWeight: 600 }}>trabajo real, sobre tu negocio real</strong>, con alguien que opera empresas todos los días y pone toda esa experiencia al servicio de la tuya.
-                </p>
-              </FadeIn>
-            </div>
+      <section id="el-programa" className="at-section-pad at-section-light" style={{ paddingTop: "0", borderTop: `1px solid ${COLORS.borderOnLight}`, position: "relative", overflow: "hidden" }}>
+        <div aria-hidden style={{
+          position: "absolute", top: "120px", right: "-180px",
+          width: "520px", height: "520px",
+          background: `radial-gradient(circle, ${COLORS.gold}14 0%, transparent 70%)`,
+          pointerEvents: "none",
+        }} />
 
+        <div className="at-fit-wide" style={{ paddingTop: "clamp(72px, 10vw, 120px)", position: "relative" }}>
+
+          {/* HEADER CENTRADO - autoridad */}
+          <FadeIn>
+            <div style={{ textAlign: "center", maxWidth: "920px", margin: "0 auto" }}>
+              <Badge theme="light">La propuesta</Badge>
+              <h2 style={{
+                fontSize: "clamp(34px, 5.2vw, 64px)",
+                fontWeight: 700,
+                marginTop: "22px",
+                lineHeight: 1.08,
+                letterSpacing: "-1.2px",
+                color: COLORS.textOnLight,
+              }}>
+                No es coaching. Es un{" "}
+                <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold, fontWeight: 700 }}>
+                  CEO operativo
+                </span>{" "}
+                sentado al lado tuyo.
+              </h2>
+              <p style={{
+                fontSize: "clamp(17px, 1.9vw, 21px)",
+                color: COLORS.textOnLightSecondary,
+                lineHeight: 1.65,
+                marginTop: "26px",
+                fontWeight: 450,
+                maxWidth: "820px",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}>
+                Mientras la mayoría de los programas te entregan teoría empaquetada, esto es trabajo real sobre tu negocio real. 12 semanas. Una sesión 1 a 1 de 90 minutos por semana. Acceso directo por WhatsApp entre sesiones. Y un CEO que opera 3 empresas y lidera más de 70 personas dándote dirección estratégica concreta sobre tus números, tus decisiones y tu crecimiento.
+              </p>
+            </div>
+          </FadeIn>
+
+          {/* GRID 2 COL: LO QUE ES / NO ES + AUTHORITY PANEL */}
+          <div className="at-prop-grid" style={{ marginTop: "64px" }}>
+
+            {/* LO QUE ES / NO ES */}
+            <FadeIn delay={0.15}>
+              <div>
+                <div style={{ marginBottom: "32px" }}>
+                  <div style={{
+                    fontSize: "11px",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    color: COLORS.purpleDark,
+                    fontWeight: 700,
+                    marginBottom: "16px",
+                  }}>
+                    Lo que es
+                  </div>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
+                    {[
+                      "Trabajo 1 a 1 con un CEO operativo, no con un asistente.",
+                      "Sesión semanal de 90 minutos durante 12 semanas.",
+                      "Acceso directo por WhatsApp entre sesiones.",
+                      "Foco quirúrgico en tus números y tus decisiones.",
+                      "Entregables concretos al cierre de cada fase.",
+                    ].map((item, i) => (
+                      <li key={i} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
+                        <span style={{
+                          minWidth: "20px", width: "20px", height: "20px", marginTop: "2px",
+                          borderRadius: "50%",
+                          background: COLORS.purple + "18",
+                          border: `1px solid ${COLORS.purple}40`,
+                          color: COLORS.purpleDark,
+                          fontSize: "11px", fontWeight: 700,
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                        }}>✓</span>
+                        <span style={{ fontSize: "15px", color: COLORS.textOnLight, lineHeight: 1.55, fontWeight: 500 }}>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <div style={{
+                    fontSize: "11px",
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    color: "#94A3B8",
+                    fontWeight: 700,
+                    marginBottom: "16px",
+                  }}>
+                    Lo que no es
+                  </div>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                    {[
+                      "Curso grabado o cohort masivo de 50 personas.",
+                      "Coaching motivacional ni trabajo de mindset.",
+                      "Consultora con PowerPoint quincenal.",
+                      "Mentoreo desde la teoría de un libro.",
+                    ].map((item, i) => (
+                      <li key={i} style={{ display: "flex", gap: "12px", alignItems: "flex-start" }}>
+                        <span style={{
+                          minWidth: "20px", width: "20px", height: "20px", marginTop: "2px",
+                          borderRadius: "50%",
+                          background: "rgba(148,163,184,0.10)",
+                          border: "1px solid rgba(148,163,184,0.30)",
+                          color: "#64748B",
+                          fontSize: "11px", fontWeight: 700,
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                        }}>✕</span>
+                        <span style={{ fontSize: "15px", color: COLORS.textOnLightSecondary, lineHeight: 1.55, fontWeight: 450, textDecoration: "line-through", textDecorationColor: "rgba(148,163,184,0.4)", textDecorationThickness: "1px" }}>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* AUTHORITY PANEL */}
             <FadeIn delay={0.3}>
               <div
                 style={{
-                  padding: "32px 32px", borderRadius: "16px",
-                  background: `linear-gradient(135deg, ${COLORS.purple}10, ${COLORS.gold}10)`,
+                  padding: "36px 32px",
+                  borderRadius: "20px",
+                  background: `linear-gradient(135deg, ${COLORS.bgLightCard}, ${COLORS.purple}06)`,
                   border: `1px solid ${COLORS.gold}40`,
-                  height: "100%", display: "flex", flexDirection: "column", justifyContent: "center",
-                  boxShadow: "0 16px 40px -16px rgba(212,168,83,0.25)",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  boxShadow: "0 24px 50px -24px rgba(212,168,83,0.30)",
                 }}
               >
-                <p style={{ fontSize: "11px", letterSpacing: "2px", textTransform: "uppercase", color: COLORS.goldDark, fontWeight: 700, marginBottom: "16px" }}>
+                <div style={{
+                  fontSize: "11px",
+                  letterSpacing: "2.5px",
+                  textTransform: "uppercase",
+                  color: COLORS.goldDark,
+                  fontWeight: 700,
+                  marginBottom: "24px",
+                }}>
+                  Quién está del otro lado
+                </div>
+
+                {/* STATS 2x2 GRID */}
+                <div style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "24px 16px",
+                  marginBottom: "28px",
+                  paddingBottom: "28px",
+                  borderBottom: `1px solid ${COLORS.borderOnLight}`,
+                }}>
+                  {[
+                    ["11", "años operando empresas"],
+                    ["+70", "personas lideradas hoy"],
+                    ["3", "empresas activas en simultáneo"],
+                    ["5", "marcas top atendidas"],
+                  ].map(([n, label]) => (
+                    <div key={label}>
+                      <div style={{
+                        fontFamily: "'Playfair Display', serif",
+                        fontStyle: "italic",
+                        fontSize: "44px",
+                        fontWeight: 700,
+                        color: COLORS.gold,
+                        lineHeight: 1,
+                        letterSpacing: "-1px",
+                      }}>
+                        {n}
+                      </div>
+                      <div style={{
+                        fontSize: "12px",
+                        color: COLORS.textOnLightSecondary,
+                        marginTop: "8px",
+                        lineHeight: 1.4,
+                        fontWeight: 500,
+                      }}>
+                        {label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* BRANDS */}
+                <div style={{
+                  fontSize: "10px",
+                  letterSpacing: "2px",
+                  textTransform: "uppercase",
+                  color: COLORS.textOnLightSecondary,
+                  fontWeight: 700,
+                  marginBottom: "12px",
+                }}>
                   Marcas con las que trabajé
-                </p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 14px", marginBottom: "20px" }}>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 10px", marginBottom: "24px" }}>
                   {["Zara", "Aerolíneas Argentinas", "EPEC", "YPF", "Mercedes-Benz"].map((m) => (
                     <span
                       key={m}
                       style={{
-                        padding: "6px 14px", borderRadius: "8px",
-                        background: COLORS.bgLightCard, border: `1px solid ${COLORS.borderOnLight}`,
-                        fontSize: "13px", fontWeight: 600, color: COLORS.textOnLight,
+                        padding: "7px 14px",
+                        borderRadius: "8px",
+                        background: COLORS.bgLightCard,
+                        border: `1px solid ${COLORS.borderOnLight}`,
+                        fontSize: "13px",
+                        fontWeight: 600,
+                        color: COLORS.textOnLight,
                         boxShadow: "0 1px 2px rgba(15,23,42,0.05)",
+                        letterSpacing: "0.2px",
                       }}
                     >
                       {m}
                     </span>
                   ))}
                 </div>
-                <p style={{ fontSize: "15px", color: COLORS.textOnLightSecondary, lineHeight: 1.7, fontWeight: 450 }}>
-                  Lidero +70 personas en 3 empresas y llevo todo eso a tu mesa cada semana. <strong style={{ color: COLORS.textOnLight, fontWeight: 600 }}>La experiencia que normalmente cuesta una consultora top tier, en una sesión semanal con vos.</strong>
+
+                {/* PULL QUOTE */}
+                <p style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontStyle: "italic",
+                  fontSize: "17px",
+                  color: COLORS.textOnLight,
+                  lineHeight: 1.5,
+                  fontWeight: 700,
+                  letterSpacing: "-0.2px",
+                  marginTop: "auto",
+                  paddingTop: "8px",
+                }}>
+                  La experiencia que normalmente cuesta una consultora top tier, en una sesión semanal cara a cara.
                 </p>
               </div>
             </FadeIn>
           </div>
+
+          {/* CIERRE PROVOCATIVO */}
+          <FadeIn delay={0.5}>
+            <div style={{
+              textAlign: "center",
+              marginTop: "72px",
+              maxWidth: "820px",
+              marginLeft: "auto",
+              marginRight: "auto",
+              padding: "0 16px",
+            }}>
+              <p style={{
+                fontFamily: "'Playfair Display', serif",
+                fontStyle: "italic",
+                fontSize: "clamp(22px, 2.6vw, 32px)",
+                color: COLORS.textOnLight,
+                lineHeight: 1.4,
+                fontWeight: 700,
+                letterSpacing: "-0.3px",
+              }}>
+                No vendo cursos. Vendo una hora y media por semana de mi cabeza, aplicada a tu negocio.
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
