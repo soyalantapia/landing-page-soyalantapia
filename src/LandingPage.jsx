@@ -586,7 +586,7 @@ export default function LandingPage() {
 
           <FadeIn instant delay={0.45}>
             <div style={{ display: "flex", gap: "clamp(24px, 5vw, 56px)", justifyContent: "center", marginTop: "32px", flexWrap: "wrap" }}>
-              {[["3", "empresas"], ["+70", "personas"], ["11", "años"]].map(([n, l]) => (
+              {[["3", "empresas"], ["+70", "personas"], ["9", "años liderando"]].map(([n, l]) => (
                 <div key={l} style={{ textAlign: "center" }}>
                   <div style={{ fontSize: "clamp(28px, 4vw, 38px)", fontWeight: 700, lineHeight: 1, background: `linear-gradient(135deg, ${COLORS.purpleLight}, ${COLORS.purple})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{n}</div>
                   <div style={{ fontSize: "12px", color: COLORS.gray, marginTop: "8px", letterSpacing: "0.5px", textTransform: "uppercase", fontWeight: 500 }}>{l}</div>
@@ -1696,9 +1696,9 @@ export default function LandingPage() {
               <FadeIn delay={0.2}>
                 <div style={{ marginTop: "32px", display: "flex", flexDirection: "column", gap: "16px" }}>
                   {[
-                    { label: "Consultora estratégica", price: "$3.000–$10.000/mes", note: "Genérica, sin foco en tu negocio" },
-                    { label: "Aceleradora seria", price: "$2.000–$5.000/mes + equity", note: "Grupal, sin atención 1 a 1" },
-                    { label: "Director comercial freelance", price: "$4.000–$8.000/mes", note: "Solo ventas, sin visión integral" },
+                    { label: "Consultora estratégica", price: "$3.000 a $10.000/mes", note: "Genérica, sin foco en tu negocio" },
+                    { label: "Aceleradora seria", price: "$2.000 a $5.000/mes + equity", note: "Grupal, sin atención 1 a 1" },
+                    { label: "Director comercial freelance", price: "$4.000 a $8.000/mes", note: "Solo ventas, sin visión integral" },
                   ].map((comp, i) => (
                     <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 20px", borderRadius: "12px", background: COLORS.bgLightCard, border: `1px solid ${COLORS.borderOnLight}`, gap: "16px", flexWrap: "wrap", boxShadow: "0 1px 2px rgba(15,23,42,0.04)" }}>
                       <div>
@@ -1893,7 +1893,7 @@ export default function LandingPage() {
                   "Todavía estás en la etapa de idea sin clientes",
                   "Buscás fórmulas mágicas o atajos rápidos",
                   "Querés que alguien haga el trabajo por vos",
-                  "No podés dedicar 60 minutos por semana al menos",
+                  "No podés dedicarle al menos 60 minutos por semana",
                   "Esperás resultados sin ejecutar lo que charlamos",
                   "Te molesta que te digan lo que no querés escuchar",
                 ].map((t, i) => (
