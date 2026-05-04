@@ -872,7 +872,7 @@ export default function LandingPage() {
                     ["9", "años liderando empresas"],
                     ["+70", "personas lideradas hoy"],
                     ["+10", "empresas como advisor"],
-                    ["12", "años emprendiendo"],
+                    ["+50", "conferencias y eventos"],
                   ].map(([n, label]) => (
                     <div key={label}>
                       <div style={{
