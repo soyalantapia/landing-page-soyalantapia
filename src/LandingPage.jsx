@@ -752,7 +752,7 @@ export default function LandingPage() {
                 marginLeft: "auto",
                 marginRight: "auto",
               }}>
-                Mientras la mayoría de los programas te entregan teoría empaquetada, esto es trabajo real sobre tu negocio real. 12 semanas. Una sesión 1 a 1 de 90 minutos por semana. Acceso directo por WhatsApp entre sesiones. Y un CEO que opera 3 empresas y lidera más de 70 personas dándote dirección estratégica concreta sobre tus números, tus decisiones y tu crecimiento.
+                Mientras la mayoría de los programas te entregan teoría empaquetada, esto es trabajo real sobre tu negocio real. 12 semanas. Una sesión 1 a 1 de 60 minutos por semana. Acceso directo por WhatsApp entre sesiones. Y un CEO que opera 3 empresas y lidera más de 70 personas dándote dirección estratégica concreta sobre tus números, tus decisiones y tu crecimiento.
               </p>
             </div>
           </FadeIn>
@@ -777,7 +777,7 @@ export default function LandingPage() {
                   <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
                     {[
                       "Trabajo 1 a 1 con un CEO operativo, no con un asistente.",
-                      "Sesión semanal de 90 minutos durante 12 semanas.",
+                      "Sesión semanal de 60 minutos durante 12 semanas.",
                       "Acceso directo por WhatsApp entre sesiones.",
                       "Foco quirúrgico en tus números y tus decisiones.",
                       "Entregables concretos al cierre de cada fase.",
@@ -968,7 +968,7 @@ export default function LandingPage() {
                 fontWeight: 700,
                 letterSpacing: "-0.3px",
               }}>
-                No vendo cursos. Vendo una hora y media por semana de mi cabeza, aplicada a tu negocio.
+                No vendo cursos. Vendo una hora por semana de mi cabeza, aplicada a tu negocio.
               </p>
             </div>
           </FadeIn>
@@ -1331,11 +1331,11 @@ export default function LandingPage() {
 
         <div className="at-2col" style={{ marginTop: "44px", gap: "32px" }}>
           {[
-            ["🎯", "Sesión semanal de 90 min, 1 a 1", "Presencial en Buenos Aires o virtual. No son charlas, son sesiones de trabajo. Cada semana decidimos qué mover."],
+            ["🎯", "Sesión semanal de 60 min, 1 a 1", "Presencial en Buenos Aires o virtual. No son charlas, son sesiones de trabajo. Cada semana decidimos qué mover."],
             ["⚡", "Feedback directo y honesto", "Te digo lo que funciona y lo que no. Sin diplomacia innecesaria. Como un socio que se juega lo mismo que vos."],
             ["🧭", "Dirección estratégica", "Qué priorizar, qué dejar, qué cambiar. Basado en operar 3 empresas, no en frameworks teóricos."],
             ["🤖", "Herramientas tech e IA", "Soy tecnológico (Desarrollador Senior) y fundé una software factory. Te muestro herramientas que la mayoría no conoce y te ahorran horas cada semana."],
-            ["💬", "Soporte por WhatsApp", "Si surge algo urgente entre sesiones, me escribís. Respondo en menos de 24 horas."],
+            ["💬", "Soporte por WhatsApp", "Si surge algo urgente entre sesiones, me escribís y lo resolvemos."],
             ["📋", "Plan de acción semanal", "Cada sesión termina con metas claras. No salís sin saber qué hacer."],
           ].map(([icon, title, desc], i) => (
             <FadeIn key={i} delay={i * 0.08}>
@@ -1653,7 +1653,7 @@ export default function LandingPage() {
                 name: "Julián R.",
                 role: "Profesional construyendo su propio proyecto",
                 accent: "gold",
-                quote: "Pagaba una consultora top tier al mes y recibía un PowerPoint cada quincena. Con Alan paso una hora y media a la semana resolviendo problemas reales. Es otra liga.",
+                quote: "Pagaba una consultora top tier al mes y recibía un PowerPoint cada quincena. Con Alan paso una hora a la semana resolviendo problemas reales. Es otra liga.",
               },
             ].map((t, i) => {
               const accent = t.accent === "gold" ? COLORS.gold : COLORS.purpleLight;
@@ -1798,7 +1798,7 @@ export default function LandingPage() {
 
                   <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "14px", fontSize: "14px", color: COLORS.grayLight, textAlign: "left" }}>
                     {[
-                      ["🎯", "12 sesiones de 90 min, 1 a 1"],
+                      ["🎯", "12 sesiones de 60 min, 1 a 1"],
                       ["💬", "WhatsApp directo entre sesiones"],
                       ["🧠", "Frameworks y plantillas probadas"],
                       ["🤖", "Setup de herramientas con IA"],
@@ -1925,7 +1925,7 @@ export default function LandingPage() {
                   "Todavía estás en la etapa de idea sin clientes",
                   "Buscás fórmulas mágicas o atajos rápidos",
                   "Querés que alguien haga el trabajo por vos",
-                  "No podés dedicar 90 minutos por semana al menos",
+                  "No podés dedicar 60 minutos por semana al menos",
                   "Esperás resultados sin ejecutar lo que charlamos",
                   "Te molesta que te digan lo que no querés escuchar",
                 ].map((t, i) => (
@@ -1957,7 +1957,7 @@ export default function LandingPage() {
             {[
               {
                 q: "¿Cuánto duran las sesiones y dónde se hacen?",
-                a: "90 minutos cada una, una vez por semana. La mayoría las hago por Google Meet. Si estás en Buenos Aires, podemos hacer algunas presenciales.",
+                a: "60 minutos cada una, una vez por semana. La mayoría las hago por Google Meet. Si estás en Buenos Aires, podemos hacer algunas presenciales.",
               },
               {
                 q: "¿Cuándo arrancamos?",
