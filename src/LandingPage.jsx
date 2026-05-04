@@ -341,7 +341,7 @@ export default function LandingPage() {
         @media (min-width: 768px) { .at-sticky-cta { display: none; } }
         .at-hero-pad-bottom { padding-bottom: 80px; }
         @media (max-width: 767px) { .at-hero-pad-bottom { padding-bottom: 100px; } }
-        .at-nav-links { display: none; }
+        .at-nav-links { display: none !important; }
         @media (min-width: 720px) { .at-nav-links { display: flex !important; } }
         .at-section-light {
           background: ${COLORS.bgLight};
@@ -402,7 +402,7 @@ export default function LandingPage() {
           </span>
         </a>
 
-        <div className="at-nav-links" style={{ display: "flex", alignItems: "center", gap: "22px" }}>
+        <div className="at-nav-links" style={{ alignItems: "center", gap: "22px" }}>
           {[
             ["El programa", "#el-programa"],
             ["Fases", "#fases"],
