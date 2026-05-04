@@ -85,7 +85,7 @@ function Badge({ children, theme = "dark" }) {
   );
 }
 
-function PhaseCard({ number, title, weeks, description, deliverable, delay, theme = "dark" }) {
+function PhaseCard({ number, title, weeks, objective, description, deliverable, delay, theme = "dark" }) {
   const isLight = theme === "light";
   return (
     <FadeIn delay={delay}>
@@ -93,54 +93,132 @@ function PhaseCard({ number, title, weeks, description, deliverable, delay, them
         style={{
           background: isLight ? COLORS.bgLightCard : COLORS.bgCard,
           border: `1px solid ${isLight ? COLORS.borderOnLight : COLORS.border}`,
-          borderRadius: "16px",
-          padding: "32px",
+          borderRadius: "20px",
+          padding: "36px 32px 32px",
           position: "relative",
           overflow: "hidden",
-          transition: "border-color 0.3s, box-shadow 0.3s",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          transition: "border-color 0.3s, box-shadow 0.3s, transform 0.3s",
           boxShadow: isLight ? "0 1px 2px rgba(15,23,42,0.04)" : "none",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.borderColor = isLight ? COLORS.purple + "55" : COLORS.purple + "60";
-          if (isLight) e.currentTarget.style.boxShadow = "0 16px 40px -16px rgba(139,92,246,0.25)";
+          if (isLight) e.currentTarget.style.boxShadow = "0 24px 50px -20px rgba(139,92,246,0.30)";
+          e.currentTarget.style.transform = "translateY(-4px)";
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.borderColor = isLight ? COLORS.borderOnLight : COLORS.border;
           if (isLight) e.currentTarget.style.boxShadow = "0 1px 2px rgba(15,23,42,0.04)";
+          e.currentTarget.style.transform = "translateY(0)";
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+        {/* HUGE EDITORIAL NUMBER BACKGROUND */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            top: "-32px",
+            right: "-18px",
+            fontFamily: "'Playfair Display', serif",
+            fontStyle: "italic",
+            fontSize: "200px",
+            lineHeight: 1,
+            fontWeight: 700,
+            color: COLORS.purple,
+            opacity: isLight ? 0.07 : 0.10,
+            pointerEvents: "none",
+            letterSpacing: "-10px",
+          }}
+        >
+          {number}
+        </div>
+
+        {/* PILL + WEEKS */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px", position: "relative", flexWrap: "wrap" }}>
           <span
             style={{
-              width: "36px", height: "36px", borderRadius: "10px",
-              background: `linear-gradient(135deg, ${COLORS.purple}, ${COLORS.purpleDark})`,
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: "14px", fontWeight: 700, color: "#fff",
+              fontSize: "11px",
+              fontWeight: 700,
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              color: isLight ? COLORS.purpleDark : COLORS.purpleLight,
+              padding: "6px 12px",
+              borderRadius: "999px",
+              background: COLORS.purple + (isLight ? "12" : "18"),
+              border: `1px solid ${COLORS.purple}30`,
             }}
           >
-            {number}
+            Fase {number}
           </span>
-          <span style={{ fontSize: "12px", color: isLight ? COLORS.textOnLightSecondary : COLORS.gray, fontWeight: 500, letterSpacing: "0.5px" }}>
+          <span style={{ fontSize: "12px", color: isLight ? COLORS.textOnLightSecondary : COLORS.gray, fontWeight: 500, letterSpacing: "0.3px" }}>
             {weeks}
           </span>
         </div>
-        <h3 style={{ fontSize: "20px", fontWeight: 700, color: isLight ? COLORS.textOnLight : COLORS.white, marginBottom: "12px", lineHeight: 1.3 }}>
+
+        {/* TITLE */}
+        <h3 style={{
+          fontSize: "clamp(22px, 2.2vw, 26px)",
+          fontWeight: 700,
+          color: isLight ? COLORS.textOnLight : COLORS.white,
+          marginBottom: "12px",
+          lineHeight: 1.18,
+          letterSpacing: "-0.4px",
+          position: "relative",
+        }}>
           {title}
         </h3>
-        <p style={{ fontSize: "15px", color: isLight ? COLORS.textOnLightSecondary : COLORS.gray, lineHeight: 1.7, marginBottom: "16px", fontWeight: isLight ? 450 : 400 }}>
+
+        {/* OBJECTIVE - PLAYFAIR ITALIC PROMISE */}
+        {objective ? (
+          <div style={{
+            fontFamily: "'Playfair Display', serif",
+            fontStyle: "italic",
+            fontSize: "16px",
+            color: COLORS.gold,
+            fontWeight: 700,
+            marginBottom: "16px",
+            position: "relative",
+          }}>
+            {objective}
+          </div>
+        ) : null}
+
+        {/* DESCRIPTION */}
+        <p style={{
+          fontSize: "15px",
+          color: isLight ? COLORS.textOnLightSecondary : COLORS.gray,
+          lineHeight: 1.65,
+          marginBottom: "24px",
+          fontWeight: isLight ? 450 : 400,
+          flexGrow: 1,
+          position: "relative",
+        }}>
           {description}
         </p>
+
+        {/* DELIVERABLE */}
         <div
           style={{
-            padding: "12px 16px", borderRadius: "10px",
-            background: isLight ? COLORS.purple + "0F" : COLORS.purple + "08",
-            border: `1px solid ${isLight ? COLORS.purple + "22" : COLORS.purple + "15"}`,
+            padding: "14px 16px",
+            borderRadius: "12px",
+            background: isLight ? COLORS.purple + "0D" : COLORS.purple + "10",
+            border: `1px solid ${isLight ? COLORS.purple + "26" : COLORS.purple + "20"}`,
+            position: "relative",
           }}
         >
-          <span style={{ fontSize: "11px", fontWeight: 600, color: isLight ? COLORS.purpleDark : COLORS.purpleLight, letterSpacing: "1px", textTransform: "uppercase" }}>
+          <div style={{
+            fontSize: "10px",
+            fontWeight: 700,
+            color: isLight ? COLORS.purpleDark : COLORS.purpleLight,
+            letterSpacing: "1.5px",
+            textTransform: "uppercase",
+            marginBottom: "6px",
+          }}>
             Lo que te llevás
-          </span>
-          <p style={{ fontSize: "14px", color: isLight ? COLORS.textOnLight : COLORS.grayLight, marginTop: "4px", lineHeight: 1.5 }}>
+          </div>
+          <p style={{ fontSize: "14px", color: isLight ? COLORS.textOnLight : COLORS.grayLight, lineHeight: 1.5, fontWeight: 500 }}>
             {deliverable}
           </p>
         </div>
@@ -1065,28 +1143,184 @@ export default function LandingPage() {
       </section>
 
       {/* LAS 4 FASES */}
-      <section id="fases" className="at-section-pad at-section-light" style={{ paddingTop: "0", borderTop: `1px solid ${COLORS.borderOnLight}` }}>
-        <div className="at-fit-wide" style={{ paddingTop: "clamp(60px, 8vw, 100px)" }}>
+      <section id="fases" className="at-section-pad at-section-light" style={{ paddingTop: "0", borderTop: `1px solid ${COLORS.borderOnLight}`, position: "relative", overflow: "hidden" }}>
+        {/* DECORATIVE GRADIENT GLOWS */}
+        <div aria-hidden style={{
+          position: "absolute", top: "120px", left: "-200px",
+          width: "600px", height: "600px",
+          background: `radial-gradient(circle, ${COLORS.purple}14 0%, transparent 70%)`,
+          pointerEvents: "none",
+        }} />
+        <div aria-hidden style={{
+          position: "absolute", bottom: "200px", right: "-220px",
+          width: "560px", height: "560px",
+          background: `radial-gradient(circle, ${COLORS.gold}1A 0%, transparent 70%)`,
+          pointerEvents: "none",
+        }} />
+
+        <div className="at-fit-wide" style={{ paddingTop: "clamp(72px, 10vw, 120px)", position: "relative" }}>
+          {/* HEADER DRAMATICO */}
           <FadeIn>
-            <Badge theme="light">Cómo funciona</Badge>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 700, marginTop: "20px", lineHeight: 1.2, letterSpacing: "-0.5px", color: COLORS.textOnLight }}>
-              4 fases. 12 semanas. Resultados concretos.
-            </h2>
+            <div style={{ textAlign: "center", maxWidth: "880px", margin: "0 auto" }}>
+              <div style={{
+                fontSize: "12px",
+                letterSpacing: "4px",
+                textTransform: "uppercase",
+                color: COLORS.purpleDark,
+                fontWeight: 700,
+                marginBottom: "22px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "10px",
+              }}>
+                <span style={{ width: "32px", height: "1px", background: COLORS.purple, opacity: 0.5 }} />
+                Cómo funciona
+                <span style={{ width: "32px", height: "1px", background: COLORS.purple, opacity: 0.5 }} />
+              </div>
+              <h2 style={{
+                fontSize: "clamp(36px, 5.5vw, 68px)",
+                fontWeight: 700,
+                lineHeight: 1.05,
+                letterSpacing: "-1.2px",
+                color: COLORS.textOnLight,
+                marginBottom: "0",
+              }}>
+                Un protocolo probado.{" "}
+                <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold, fontWeight: 700 }}>
+                  12 semanas
+                </span>{" "}
+                para empujar tu negocio.
+              </h2>
+              <p style={{
+                fontSize: "clamp(17px, 1.8vw, 20px)",
+                color: COLORS.textOnLightSecondary,
+                lineHeight: 1.6,
+                marginTop: "26px",
+                fontWeight: 450,
+                maxWidth: "720px",
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}>
+                4 fases. Cada una con un objetivo concreto, sesiones 1 a 1, y un entregable que te llevás. Lo que en otros programas tarda años, acá pasa en 3 meses.
+              </p>
+            </div>
           </FadeIn>
 
-          <div className="at-phases" style={{ marginTop: "44px" }}>
-            <PhaseCard theme="light" number="1" title="Mapa del negocio" weeks="Semanas 1–3" description="Entendemos exactamente dónde estás, dónde estás perdiendo oportunidades, y cuáles son las 3 palancas que más rápido van a mover tu facturación." deliverable="Mapa de situación + Plan de acción con 3 prioridades claras." delay={0.1} />
-            <PhaseCard theme="light" number="2" title="Motor de ventas" weeks="Semanas 4–6" description="Armamos tu proceso comercial para que consigas clientes de forma predecible. Propuesta de valor, mensaje, canales, y primeras acciones de captación funcionando." deliverable="Proceso comercial documentado y en funcionamiento." delay={0.2} />
-            <PhaseCard theme="light" number="3" title="Operación autónoma" weeks="Semanas 7–9" description="Construimos los procesos para que puedas delegar sin que se rompa todo. Automatizamos lo repetitivo. Liberamos tu tiempo para lo estratégico." deliverable="3 procesos documentados + automatizaciones con IA." delay={0.3} />
-            <PhaseCard theme="light" number="4" title="Plan de escala" weeks="Semanas 10–12" description="Definimos exactamente cómo vas a crecer en los próximos 90 días. Métricas, modelo financiero, y un roadmap claro." deliverable="Roadmap trimestral + métricas de seguimiento." delay={0.4} />
+          {/* TIMELINE STRIP */}
+          <FadeIn delay={0.15}>
+            <div style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "8px",
+              marginTop: "44px",
+              flexWrap: "wrap",
+            }}>
+              {[
+                ["01", "S1 a 3"],
+                ["02", "S4 a 6"],
+                ["03", "S7 a 9"],
+                ["04", "S10 a 12"],
+              ].map(([n, w], i) => (
+                <span key={n} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                  <span style={{
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    color: COLORS.textOnLight,
+                    background: COLORS.bgLightCard,
+                    border: `1px solid ${COLORS.borderOnLight}`,
+                    padding: "8px 14px",
+                    borderRadius: "999px",
+                    boxShadow: "0 1px 2px rgba(15,23,42,0.04)",
+                    letterSpacing: "0.5px",
+                  }}>
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.gold, marginRight: "6px" }}>{n}</span>
+                    {w}
+                  </span>
+                  {i < 3 ? (
+                    <span style={{ width: "16px", height: "1px", background: COLORS.purple, opacity: 0.35 }} />
+                  ) : null}
+                </span>
+              ))}
+            </div>
+          </FadeIn>
+
+          {/* PHASE CARDS */}
+          <div className="at-phases" style={{ marginTop: "60px" }}>
+            <PhaseCard theme="light" number="01" title="Mapa del negocio" weeks="Semanas 1 a 3" objective="Diagnóstico real, sin diplomacia." description="Entendemos exactamente dónde estás, dónde estás perdiendo oportunidades, y cuáles son las 3 palancas que más rápido van a mover tu facturación." deliverable="Mapa de situación + Plan de acción con 3 prioridades claras." delay={0.1} />
+            <PhaseCard theme="light" number="02" title="Motor de ventas" weeks="Semanas 4 a 6" objective="Clientes de forma predecible." description="Armamos tu proceso comercial. Propuesta de valor, mensaje, canales, y primeras acciones de captación funcionando antes de la sesión 6." deliverable="Proceso comercial documentado y en funcionamiento." delay={0.2} />
+            <PhaseCard theme="light" number="03" title="Operación autónoma" weeks="Semanas 7 a 9" objective="Que el negocio no dependa de vos." description="Construimos los procesos para que puedas delegar sin que se rompa todo. Automatizamos lo repetitivo con IA. Liberamos tu tiempo para lo estratégico." deliverable="3 procesos documentados + automatizaciones con IA." delay={0.3} />
+            <PhaseCard theme="light" number="04" title="Plan de escala" weeks="Semanas 10 a 12" objective="Roadmap claro a 90 días." description="Definimos exactamente cómo vas a crecer en los próximos 90 días. Métricas, modelo financiero, prioridades trimestrales y un roadmap accionable." deliverable="Roadmap trimestral + métricas de seguimiento." delay={0.4} />
           </div>
 
+          {/* STATS STRIP */}
           <FadeIn delay={0.5}>
-            <p style={{ fontSize: "16px", color: COLORS.textOnLightSecondary, textAlign: "center", marginTop: "28px", lineHeight: 1.7, fontWeight: 450 }}>
-              En 12 semanas comprimimos lo que de otra forma te llevaría años de prueba y error.
-              <br />
-              <strong style={{ color: COLORS.textOnLight, fontWeight: 600 }}>Y después seguimos trabajando juntos para que el crecimiento no pare.</strong>
-            </p>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+              gap: "24px",
+              marginTop: "72px",
+              padding: "36px 28px",
+              borderTop: `1px solid ${COLORS.borderOnLight}`,
+              borderBottom: `1px solid ${COLORS.borderOnLight}`,
+            }}>
+              {[
+                ["4", "Fases"],
+                ["12", "Semanas"],
+                ["12", "Sesiones 1 a 1"],
+                ["~10", "Entregables"],
+              ].map(([n, label]) => (
+                <div key={label} style={{ textAlign: "center" }}>
+                  <div style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontStyle: "italic",
+                    fontSize: "clamp(40px, 5vw, 56px)",
+                    fontWeight: 700,
+                    color: COLORS.gold,
+                    lineHeight: 1,
+                    letterSpacing: "-1px",
+                  }}>
+                    {n}
+                  </div>
+                  <div style={{
+                    fontSize: "11px",
+                    fontWeight: 700,
+                    letterSpacing: "2px",
+                    textTransform: "uppercase",
+                    color: COLORS.textOnLightSecondary,
+                    marginTop: "10px",
+                  }}>
+                    {label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+
+          {/* CLOSING STATEMENT */}
+          <FadeIn delay={0.6}>
+            <div style={{ textAlign: "center", marginTop: "56px", maxWidth: "780px", marginLeft: "auto", marginRight: "auto" }}>
+              <p style={{
+                fontFamily: "'Playfair Display', serif",
+                fontStyle: "italic",
+                fontSize: "clamp(22px, 2.6vw, 32px)",
+                color: COLORS.textOnLight,
+                lineHeight: 1.4,
+                fontWeight: 700,
+                letterSpacing: "-0.3px",
+              }}>
+                En 12 semanas comprimimos lo que de otra forma te llevaría años de prueba y error.
+              </p>
+              <p style={{
+                fontSize: "16px",
+                color: COLORS.textOnLightSecondary,
+                marginTop: "16px",
+                lineHeight: 1.6,
+                fontWeight: 500,
+              }}>
+                Y después seguimos trabajando juntos para que el crecimiento no pare.
+              </p>
+            </div>
           </FadeIn>
         </div>
       </section>
