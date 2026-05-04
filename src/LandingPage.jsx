@@ -863,22 +863,22 @@ export default function LandingPage() {
                 <div style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",
-                  gap: "24px 16px",
-                  marginBottom: "28px",
-                  paddingBottom: "28px",
+                  gap: "28px 16px",
+                  marginBottom: "32px",
+                  paddingBottom: "32px",
                   borderBottom: `1px solid ${COLORS.borderOnLight}`,
                 }}>
                   {[
-                    ["11", "años operando empresas"],
+                    ["9", "años liderando empresas"],
                     ["+70", "personas lideradas hoy"],
-                    ["3", "empresas activas en simultáneo"],
-                    ["5", "marcas top atendidas"],
+                    ["+10", "empresas como advisor"],
+                    ["12", "años emprendiendo"],
                   ].map(([n, label]) => (
                     <div key={label}>
                       <div style={{
                         fontFamily: "'Playfair Display', serif",
                         fontStyle: "italic",
-                        fontSize: "44px",
+                        fontSize: "48px",
                         fontWeight: 700,
                         color: COLORS.gold,
                         lineHeight: 1,
@@ -889,45 +889,13 @@ export default function LandingPage() {
                       <div style={{
                         fontSize: "12px",
                         color: COLORS.textOnLightSecondary,
-                        marginTop: "8px",
+                        marginTop: "10px",
                         lineHeight: 1.4,
                         fontWeight: 500,
                       }}>
                         {label}
                       </div>
                     </div>
-                  ))}
-                </div>
-
-                {/* BRANDS */}
-                <div style={{
-                  fontSize: "10px",
-                  letterSpacing: "2px",
-                  textTransform: "uppercase",
-                  color: COLORS.textOnLightSecondary,
-                  fontWeight: 700,
-                  marginBottom: "12px",
-                }}>
-                  Marcas con las que trabajé
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 10px", marginBottom: "24px" }}>
-                  {["Zara", "Aerolíneas Argentinas", "EPEC", "YPF", "Mercedes-Benz"].map((m) => (
-                    <span
-                      key={m}
-                      style={{
-                        padding: "7px 14px",
-                        borderRadius: "8px",
-                        background: COLORS.bgLightCard,
-                        border: `1px solid ${COLORS.borderOnLight}`,
-                        fontSize: "13px",
-                        fontWeight: 600,
-                        color: COLORS.textOnLight,
-                        boxShadow: "0 1px 2px rgba(15,23,42,0.05)",
-                        letterSpacing: "0.2px",
-                      }}
-                    >
-                      {m}
-                    </span>
                   ))}
                 </div>
 
