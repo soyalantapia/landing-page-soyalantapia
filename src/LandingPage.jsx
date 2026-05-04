@@ -858,6 +858,12 @@ export default function LandingPage() {
                   caption: "Entrevista en podcast",
                   meta: "Negocios · Internacional",
                 },
+                {
+                  src: "fotos/event-startup-nicho.jpg",
+                  fallbackEmoji: "🎤",
+                  caption: "Charla de cómo crear una startup en un nicho",
+                  meta: "Conferencia · Inmobiliario",
+                },
               ].map((ev, i) => (
                 <FadeIn key={i} delay={i * 0.08}>
                   <div
