@@ -1504,45 +1504,17 @@ export default function LandingPage() {
                   <p style={{
                     fontSize: "16px",
                     color: COLORS.textOnLightSecondary,
-                    lineHeight: 1.65,
+                    lineHeight: 1.7,
                     fontWeight: 450,
                     maxWidth: "820px",
                   }}>
-                    Las 12 semanas son la intensidad inicial. Después seguimos trabajando juntos mes a mes durante todo el año si vos querés. Tu negocio cambia, los desafíos cambian, y yo sigo del otro lado del WhatsApp y de la sesión semanal. Sin contrato anual, sin atarte. Mientras te aporte, seguimos.
+                    Las 12 semanas son la intensidad inicial. Después seguimos trabajando juntos mes a mes durante todo el año si vos querés. Tu negocio cambia, los desafíos cambian, y yo sigo del otro lado del WhatsApp y de la sesión semanal. Sin contrato anual, sin atarte. Y si veo que tu negocio tiene potencial real para escalar y siento que te puedo aportar valor, paso a ser tu{" "}
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.goldDark, fontWeight: 700 }}>
+                      advisor
+                    </span>
+                    {" "}manteniendo el mismo precio. Sin renegociar, sin equity, sin sorpresas. La regla es simple:{" "}
+                    <strong style={{ color: COLORS.textOnLight, fontWeight: 700 }}>mientras te aporte, seguimos</strong>.
                   </p>
-
-                  {/* PROMESA ADVISOR */}
-                  <div style={{
-                    marginTop: "24px",
-                    padding: "20px 24px",
-                    borderRadius: "14px",
-                    background: `linear-gradient(135deg, ${COLORS.gold}10, ${COLORS.gold}04)`,
-                    border: `1px dashed ${COLORS.gold}66`,
-                    maxWidth: "820px",
-                  }}>
-                    <div style={{
-                      fontSize: "10px",
-                      letterSpacing: "2.5px",
-                      textTransform: "uppercase",
-                      color: COLORS.goldDark,
-                      fontWeight: 700,
-                      marginBottom: "10px",
-                    }}>
-                      Y si veo potencial real
-                    </div>
-                    <p style={{
-                      fontSize: "16px",
-                      color: COLORS.textOnLight,
-                      lineHeight: 1.65,
-                      fontWeight: 500,
-                    }}>
-                      Si veo que tu negocio tiene potencial real para escalar y siento que te puedo aportar valor, paso a ser tu{" "}
-                      <span style={{ fontFamily: "'Playfair Display', serif", fontStyle: "italic", color: COLORS.goldDark, fontWeight: 700 }}>
-                        advisor
-                      </span>
-                      {" "}manteniendo el mismo precio. Sin renegociar, sin equity, sin sorpresas. La regla es simple: mientras te aporte, seguimos.
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>
