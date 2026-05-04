@@ -309,9 +309,9 @@ export default function LandingPage() {
         .at-reason-card:hover { border-color: ${COLORS.purple}40; transform: translateY(-2px); }
         .at-gallery-grid { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
         @media (min-width: 900px) { .at-gallery-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
-        .at-testimonial-grid { display: grid; gap: 20px; grid-template-columns: 1fr; max-width: 720px; margin-left: auto; margin-right: auto; }
-        @media (min-width: 640px) { .at-testimonial-grid { grid-template-columns: 1fr 1fr; max-width: 100%; } }
-        @media (min-width: 900px) { .at-testimonial-grid { grid-template-columns: repeat(3, 1fr); } }
+        .at-testimonial-grid { display: grid; gap: 20px; grid-template-columns: 1fr; }
+        @media (min-width: 640px) { .at-testimonial-grid { grid-template-columns: 1fr 1fr; } }
+        @media (min-width: 1100px) { .at-testimonial-grid { grid-template-columns: repeat(4, 1fr); } }
         .at-testimonial-layout { display: grid !important; gap: 32px !important; grid-template-columns: 1fr !important; }
         @media (min-width: 900px) { .at-testimonial-layout { grid-template-columns: minmax(320px, 400px) 1fr !important; gap: 40px !important; align-items: start !important; } }
         .at-quote-grid { grid-template-columns: 1fr !important; }
@@ -1147,6 +1147,7 @@ export default function LandingPage() {
               { videoId: "4dGqAfCFcWg", label: "Manuel S.", role: "Founder de agencia digital" },
               { videoId: "R53Cc4xKjYQ", label: "Agustín G.", role: "Founder de SaaS B2B" },
               { videoId: "h3bV8iS6gMQ", label: "Julián R.", role: "Profesional construyendo" },
+              { videoId: "AaQ_2e0FVuo", label: "Sofía M.", role: "Educadora · Creadora" },
             ].map((v, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 <div
