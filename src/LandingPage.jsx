@@ -1150,10 +1150,10 @@ export default function LandingPage() {
           {/* Grid 4 videos */}
           <div className="at-testimonial-grid" style={{ marginTop: "44px" }}>
             {[
-              { videoId: "4dGqAfCFcWg", label: "Manuel S.", role: "Founder de agencia digital" },
-              { videoId: "R53Cc4xKjYQ", label: "Agustín G.", role: "Founder de SaaS B2B" },
-              { videoId: "h3bV8iS6gMQ", label: "Julián R.", role: "Profesional construyendo" },
-              { videoId: "AaQ_2e0FVuo", label: "Sofía M.", role: "Educadora · Creadora" },
+              { videoId: "4dGqAfCFcWg", label: "Carolina Astegiano", role: "Fundadora de Master English" },
+              { videoId: "R53Cc4xKjYQ", label: "Agustín Escoda", role: "Founder de App" },
+              { videoId: "h3bV8iS6gMQ", label: "Manuel Casaboun", role: "Influencer" },
+              { videoId: "AaQ_2e0FVuo", label: "Manuel Santamaria", role: "Fundador de Anexa" },
             ].map((v, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 <div
@@ -1197,18 +1197,18 @@ export default function LandingPage() {
           >
             {[
               {
-                initials: "MS",
-                name: "Manuel S.",
-                role: "Founder de agencia digital · Buenos Aires",
+                initials: "JJ",
+                name: "Juan Jaramillo",
+                role: "CEO & Founder · Tecnología",
                 accent: "gold",
-                quote: "Cuando arranqué con Alan estaba quemado, atendiendo todo yo. En 6 semanas armamos el proceso comercial y el sistema de delegación. Hoy mi agencia factura más sin que yo esté en cada llamada.",
+                quote: "Alan es una persona que sabe muchísimo en todos los ámbitos relacionados con la empresa. Una conversación con él te cambia la perspectiva de lo que estés construyendo. Recomiendo poder sentarse con él siempre que tengas la oportunidad.",
               },
               {
-                initials: "AG",
-                name: "Agustín G.",
-                role: "Founder de SaaS B2B · Córdoba",
+                initials: "AE",
+                name: "Agustín Escoda",
+                role: "Growth · Influencer Marketing & UGC",
                 accent: "purple",
-                quote: "No es coaching motivacional. Cada sesión salgo con 3 cosas concretas para hacer la semana siguiente. Alan opera 3 empresas, no te habla desde un libro, te habla desde lo que vive todos los días.",
+                quote: "Tengo el privilegio de contar con Alan como mentor. Lo que más valoro es que no solo me acompaña en lo profesional, también en momentos clave de mi vida personal, siempre con una mirada estratégica y humana. Demuestra una generosidad poco común: siempre disponible para orientar, compartir recursos y dar consejos sinceros.",
               },
               {
                 initials: "JR",
